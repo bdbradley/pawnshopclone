@@ -1,0 +1,2 @@
+class PawnshopsController < ApplicationController
+end
