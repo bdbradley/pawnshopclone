@@ -12,7 +12,8 @@ class PawnshopsController < ApplicationController
     end
 
     def create
-      Pawn.create(pawn_params)
+      @pawn = Pawn.create(pawn_params)
+      redirect_to root_path
 
     end
 
