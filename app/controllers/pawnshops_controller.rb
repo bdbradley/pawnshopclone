@@ -8,6 +8,7 @@ class PawnshopsController < ApplicationController
     end
 
     def show
+   
     end
 
     def create
