@@ -1,0 +1,2 @@
+module PawnshopsHelper
+end
