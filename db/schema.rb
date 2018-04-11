@@ -16,23 +16,21 @@ ActiveRecord::Schema.define(version: 20180409063544) do
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.integer  "id_for_game"
-    t.integer  "name"
-    t.string   "black_player_id"
-    t.string   "white_player_id"
+    t.string   "name"
+    t.integer  "black_player_id"
+    t.integer  "white_player_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
 
   create_table "pieces", force: :cascade do |t|
-    t.integer  "id_for_piece"
     t.string   "type"
     t.integer  "x_position"
     t.integer  "y_position"
     t.string   "color"
     t.string   "image"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
