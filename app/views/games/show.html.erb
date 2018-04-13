@@ -1,1 +1,16 @@
-<h1>Welcome to the team show page</h1>
+
+<table>
+<% 8.times do |row_index| %>
+  <tr>
+
+    <% 8.times do |col_index|  %>
+      <td>
+        <% piece = Piece.find_by_position(col_index, row_index, @game.id) %>
+        <% if piece.present? %>
+          <span class="piece" data='{"id": <%= piece.id %>, "game_id": <%= @game.id %>}'><%= piece.to_ascii_piece.html_safe %></span>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
