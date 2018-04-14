@@ -7,8 +7,42 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+
+  <nav class="navbar justify-content-center navbar-light" style="background: linear-gradient(grey, white)";>
+    <a class="navbar-brand" href="/">The Pawnshop</a>  
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="nav justify-content-center">
+            <a class="nav-item nav-link" href="/games/new">Start a Game</a>
+            <a class="nav-item nav-link" href="/games">Join a Game</a>
+              <li class="nav-item nav-link">
+                <%if user_signed_in? %>
+                  <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-item nav-link' %>
+                <% else %>
+              </li>
+            <a class="nav-item nav-link" href="/users/sign_in">Sign In</a>
+          <a class="nav-item nav-link" href="/users/sign_up">Sign Up</a>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+
+          
+        
+          
+        
+
+  
+
+        
+        
+        
+
+  
     
-   <body>
+  <body>
     <% if notice.present? %>
       <p class="alert alert-info"><%= notice %></p>
     <% end %>
@@ -17,4 +51,5 @@
     <% end %>
     <%= yield %>
   </body>
-</html>
+
+  </html>
