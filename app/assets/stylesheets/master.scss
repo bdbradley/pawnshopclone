@@ -1,6 +1,7 @@
 @import "bootstrap";
 @import "font-awesome";
 @import url('https://fonts.googleapis.com/css?family=Homemade+Apple');
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script:700');
 
 .hero {
   background: image_url('ChessHero.jpeg') no-repeat center center;
@@ -8,25 +9,48 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 670px;
+  height: 700px;
   box-shadow: 0px 1px 3px #2a2a2a;
-  opacity: .887;
+  
+ 
 }
 
 .nav-link {
-	color: black;
+	color: white;
 }
 
 .navbar-toggler {
-	color: black;
+	color: white;
+
+}
+
+.navbar-brand, a:hover {
+	color: #b2ae9e;
 }
 
 .navbar-brand {
-	color: black;
-	font-size: 64px;
+
+	color: white;
+	font-size: 96px;
 	text-align: center;
-	font-family: 'Homemade Apple', cursive;
-	font-weight: 900;
+	font-family: 'Dancing Script', cursive;
+
+}
+
+#modal-trigger {
+	background-color: red;
+	width: 200px;
+	opacity: .73;
+
+
+}
+
+.login-container {
+
+  max-width: 350px;
+  width: 100% !important;
+  background-color: #F7F7F7;
+  
 
 }
 
@@ -45,7 +69,9 @@
 }
 
 #team {
-    background: #556262 !important;
+    background: #DE6262;  
+	background: -webkit-linear-gradient(to bottom, #3c3b3f, #605c3c);  
+	background: linear-gradient(to bottom, #3c3b3f, #605c3c); 
 }
 
 .btn-primary:hover,
@@ -66,12 +92,16 @@ section {
     padding: 60px 0;
 }
 
+
+
 section .section-title {
     text-align: center;
-    color: #007b5e;
+    color: white;
     margin-bottom: 50px;
     text-transform: uppercase;
+
 }
+
 
 #team .card {
     border: none;
@@ -162,7 +192,7 @@ section .section-title {
 
 .frontside .card .card-title,
 .backside .card .card-title {
-    color: #007b5e !important;
+    color: black !important;
 }
 
 .frontside .card .card-body img {
@@ -173,17 +203,21 @@ section .section-title {
 
 /* New Game Create Form */
 
-.login-block {
-    background: #DE6262;  
-	background: -webkit-linear-gradient(to bottom, #3c3b3f, #605c3c);  
-	background: linear-gradient(to bottom, #3c3b3f, #605c3c); 
+#login-button {
+	background-color: red;
+	color: white;
+	font-weight: 500;
+	align-content: center;
 }
 
+#logIN {
+	display: none; 
+	background: linear-gradient(to bottom right, #bdc3c7, #bdc3c7);
+	border-radius: 12px;
+  	opacity: .8;
+  	width: 100%;
+ }
 
-.login-sec {padding: 50px 30px; position:relative;}
-.login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
-.login-sec .copy-text i{color:#FEB58A;}
-.login-sec .copy-text a{color:#E36262;}
-.login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #DE6262;}
-.login-sec h2:after{content:" "; width:100px; height:5px; background:#FEB58A; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
-.btn-login{background: #DE6262; color:#fff; font-weight:600;}
+.login-sec {padding: 30px 30px; position:relative;}
+.login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: black;}
+.login-sec h2:after{content:" "; width:100%px; height:5px; background:black; display:block; margin-top:20px;}
