@@ -1,19 +1,18 @@
-
-<br />
-  <div>
-    <h1><%= @game.name %></h1><br />
-  </div>
-
-  <hr />
-
-
-<br />
-
-<div id="chessboard">
-	<% 4.times do %>
-		<%= render 'odd_row' %>
-		<%= render 'even_row' %>
-	<% end %>
+<br/>
+<div>
+  <h1><%= @game.name %></h1><br/>
 </div>
 
-<br />
+<hr/>
+
+<br/>
+<div align="center">
+  <div id="chessboard">
+    <% 4.times do %>
+      <%= render 'odd_row' %>
+      <%= render 'even_row' %>
+    <% end %>
+  </div>
+</div>
+
+<br/>
