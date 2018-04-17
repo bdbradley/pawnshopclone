@@ -10,7 +10,7 @@ class GamesController < ApplicationController
     end
 
     def create
-      @game = current_user.created_games.create(game_params)
+      @game = Game.create(game_params)
       if @game.persisted?
         flash[:success] = ''
       end
@@ -24,7 +24,7 @@ class GamesController < ApplicationController
     private
 
     def game_params
-      params.require(:game).permit(:name)
+      params.require(:game).permit(:name, :white_player_id, :black_player_id)
     end
 
   end
