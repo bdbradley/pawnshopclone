@@ -3,10 +3,13 @@
   <head>
     <title>Pawnshop</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    
+
   </head>
+<<<<<<< HEAD
     <%= link_to root_path do %>
   
          The Rubber Duckies
@@ -26,4 +29,54 @@
     <% end %>
     <%= yield %>
   </body>
+=======
+
+    <body>
+      <% if notice.present? %>
+        <p class="alert alert-info"><%= notice %></p>
+      <% end %>
+      <% if alert.present? %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+      
+    </body>
+
+>>>>>>> 347b4ac3a05578df7d69eecdefa98d56afc8823d
 </html>
+
+  
+    
+      
+  
+      
+              
+
+                
+          
+            
+            
+            
+            
+            
+       
+      
+      
+        
+
+
+
+
+          
+        
+          
+        
+
+  
+
+        
+        
+        
+
+  
+    

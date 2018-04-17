@@ -36,8 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'simple_form'
-gem 'popper_js', '~> 1.11.1'
-gem 'bootstrap', '4.0.0.alpha6'
+gem 'bootstrap', '~> 4.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -56,11 +55,21 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+<<<<<<< HEAD
 gem 'popper_js', '~> 1.11.1'
 gem 'bootstrap', '4.0.0.alpha6'
+=======
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'popper_js', '~> 1.12', '>= 1.12.9'
+gem 'devise'
+gem "font-awesome-rails"
+
+>>>>>>> 347b4ac3a05578df7d69eecdefa98d56afc8823d
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
 
-gem 'devise'
+
