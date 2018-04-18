@@ -1,7 +1,69 @@
+
+<div class="container-header">
+  <div class="d-flex justify-content-center">
+    <div class="newgamebg">
+      <div class="navbar-brand" href="/" style="color:black;">The Pawnshop</a>
+        <div id="logIN" class="col-md-3 mx-auto login-sec">
+          <h2 class="text-center">SIGN IN</h2>
+            <form class="login-form">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="text-uppercase">Username</label>
+                <input type="text" class="form-control" placeholder="">
+              </div>
+              <div class="form-group">  
+                <label for="exampleInputPassword1" class="text-uppercase">Password</label>
+                <input type="password" class="form-control" placeholder="">
+              </div>
+              <div class="col-md-12 mx-auto text-center">
+                <a href="#">Forgot Password?</a>
+              </div>
+                <br>
+              <div class="col-md-12 mx-auto">
+                <a class="btn btn-primary btn-lg btn-block" id="login-button" href="/games/new" role="button">Log In</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
+
+
+
+
+
+  <div id="NewGame" class="container mx-auto">
+    <div class="row">
+      <div class="col-md-12 mx-auto login-sec">
+        <h2 class="text-center">START A NEW GAME</h2>
+          <form class="login-form">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="text-uppercase">Username</label>
+              <input type="text" class="form-control" placeholder="">
+            </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1" class="text-uppercase">Password</label>
+                <input type="password" class="form-control" placeholder="">
+              </div>
+            <div class="form-check">
+              <button type="submit" class="btn btn-login">CREATE</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 <h1>Create Game</h1>
 <%= simple_form_for @game do |f| %>
   <%= f.input :name %>
   <br />
 
   <%= f.submit 'Create', class: 'btn btn-danger' %>
-<% end %>
+<% end %>              
+              
