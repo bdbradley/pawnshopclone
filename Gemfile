@@ -37,7 +37,7 @@ gem 'jbuilder', '~> 2.5'
 
 # include SimpleForm
 gem 'simple_form'
-gem 'popper_js', '~> 1.11.1'
+gem 'popper_js', '~> 1.12.9'
 
 # Creates responsive, mobile projects
 gem 'bootstrap', '~> 4.1.0'
