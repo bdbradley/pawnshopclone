@@ -1,15 +1,4 @@
-<<<<<<< HEAD
-<h1>Create Game</h1>
-<%= simple_form_for @game do |f| %>
-  <%= f.input :name %>
-  <br />
-  <%= f.submit 'Create', class: 'btn btn-danger' %>
-<% end %>
-=======
 
-  
-
-    
 <div class="container-header">
   <div class="d-flex justify-content-center">
     <div class="newgamebg">
@@ -69,9 +58,12 @@
     </div>
   </div>
 
+
+<h1>Create Game</h1>
+<%= simple_form_for @game do |f| %>
+  <%= f.input :name %>
+  <br />
+
+  <%= f.submit 'Create', class: 'btn btn-danger' %>
+<% end %>              
               
-              
-    
-  
-  
->>>>>>> 347b4ac3a05578df7d69eecdefa98d56afc8823d
