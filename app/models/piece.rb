@@ -50,38 +50,40 @@ class Piece < ApplicationRecord
   
   
   diagonal_move = (x1 != x2) && (y1 != y2)
-    if diagonal_move
-      if (y1 < y2) && (x1 < x2)
-        small_y = y1
-        big_y = y2
-        small_x = x1
-      elsif (y1 < y2) && (x2 < x1)
-        small_y = y1
-        big_y = y2
-        small_x = x2
-      elsif (y1 > y2) && (x1 < x2)
-        small_y = y2
-        big_y = y1
-        small_x = x1
-      else (y1 > y2) && (x2 < x1)
-        small_y = y2
-        big_y = y1
-        small_x = x2
-      end
-
-      i = small_y + 1
-      x = small_x + 1
-      
-      while i < big_y do
-        if ($board[i][x] === nil)
-          i +=1
-          x +=1
-        else
-          return false
-        end
-      end
-      return true
+  if diagonal_move
+    if (x1 - x2).abs != (y1 - y2).abs
+      raise "Invalid move"
     end
+    if (y1 < y2) && (x1 < x2)
+      small_y = y1
+      big_y = y2
+      small_x = x1
+    elsif (y1 < y2) && (x2 < x1)
+      small_y = y1
+      big_y = y2
+      small_x = x2
+    elsif (y1 > y2) && (x1 < x2)
+      small_y = y2
+      big_y = y1
+      small_x = x1
+    else (y1 > y2) && (x2 < x1)
+      small_y = y2
+      big_y = y1
+      small_x = x2
+    end
+
+    i = small_y + 1
+    x = small_x + 1
+    
+    while i < big_y do
+      if ($board[i][x] === nil)
+        i +=1
+        x +=1
+      else
+        return false
+      end
+    end
+    return true
   end
 end
 
