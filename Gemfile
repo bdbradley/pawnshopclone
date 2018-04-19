@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -35,14 +36,30 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# include SimpleForm
 gem 'simple_form'
-gem 'bootstrap', '~> 4.0'
+gem 'popper_js', '~> 1.12.9'
+
+# Creates responsive, mobile projects
+gem 'bootstrap', '~> 4.1.0'
+
+# Use devise for user login/logout/etc.
+gem 'devise'
+
+# fonts and stylesheets as a Rails engine
+gem "font-awesome-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+
+   # Use rspec as testing framework
   gem 'rspec-rails', '~> 3.5'
+
+  # Use FactoryGirl to use factories
   gem "factory_bot_rails"
+
+  # Use pry for multiple functionality inside rails console
   gem 'pry-rails'
 end
 
@@ -55,21 +72,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-<<<<<<< HEAD
-gem 'popper_js', '~> 1.11.1'
-gem 'bootstrap', '4.0.0.alpha6'
-=======
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'popper_js', '~> 1.12', '>= 1.12.9'
-gem 'devise'
-gem "font-awesome-rails"
-
->>>>>>> 347b4ac3a05578df7d69eecdefa98d56afc8823d
-
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
-
-

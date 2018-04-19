@@ -112,3 +112,4 @@ end
 # puts is_obstructed? 1, 2, 5, 6
 
 
+
