@@ -1,8 +1,9 @@
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :show]
+  before_action :authenticate_user!, only: %i[new create show update forfeit destroy]
+  helper_method :game
 
     def index
-      @available_games = Game.where(black_player_id: nil).where.not(white_player_id: current_user)
+      @available_games = Game.available
     end
 
     def new
@@ -12,18 +13,23 @@ class GamesController < ApplicationController
     def create
       @game = Game.create(game_params)
       @game.populate_board!
-      redirect_to game_path(@game)
+      redirect_to games_path(@game)
     end
 
     def show
       @game = Game.find(params[:id])
-      gon.user_white_name = @game.white_player.name
-      gon.user_black_name = @game.black_player.name unless @game.user_black.nil?
+      @white_player = @game.white_player.name
+      @black_player = @game.black_player.name unless @game.black_player.nil?
+
     end
+
+    def update
+      
+    end 
 
     private 
 
     def game_params
-    params.require(:game).permit(:white_user_id, :black_user_id)
+    params.require(:game).permit(:white_player_id, :black_player_id)
   end
 end

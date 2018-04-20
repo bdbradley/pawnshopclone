@@ -1,18 +1,20 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  
 
-  helper_method :game 
+  protect_from_forgery with: :exception	
 
-  def available
-  	Game.where(black_player_id: nil).where.not(white_player_id: current_user.id).first(10)
-  end 
+  def after_sign_in_path_for(resource_or_scope)
+    if resource_or_scope.is_a?(User)
+      games_path
+    else
+      super
+    end
+  end
 
-  def in_progress
 
-  end 
+  
+  
 
-  def ended 
-
-  end  
+  
 
 end

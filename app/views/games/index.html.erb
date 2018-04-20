@@ -1,14 +1,68 @@
+		<div class="jumbotron">
+      <% if user_signed_in? %>
+        <h1>Welcome back, trusted user!</h1>
+        <p class="lead">
+        You are currently signed in as <%= current_user.name %>  
+        </p>
+        <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger' %>
+      <% end %>
+    </div>
+      
 
-<h1>Available Games to Join</h1>
-<% @games.each do |game| %>
-  <div>
-   <h1><%= link_to game.name, game_path(game) %></h1><br />
-    <i><%= game.name %></i><br />
-  </div>
-  <hr />
-<% end %>
+
+    <div class="container-fluid">
+      <div class="col-12">
+      <% if user_signed_in? %>
+        <h1>Would you like to start a new game? Join a game as the white player and wait for your oppenent as the black player</h1>
+        <%= link_to "Start a new game", new_game_path(game: {white_player_id: current_user} ), class: "btn btn-success" %>
+      <% else %>
+        <h1>Sign in if you want to create a new game.</h1>
+      <% end %>
+    </div>
+  
+    <div class="container-fluid">
+      <div class="col-12">
+	     <h1>Open Games Available to Join:</h1>
+	     <% @available_games.each do |game| %>
+      </div>
+     
+      <div class="col-12">
+        <%= game.white_player.name %> is playing as white.
+      </div>
+      
+        <% if game.black_player == nil %>
+          Black is Available
+        <% if user_signed_in? %>
+          <%= link_to "Join this game as the Black Player", game_path(game.id), method: :put, class: "btn btn-success"%>
+        <% else %>
+          Sign in to join this game.
+        <% end %>
+        <% else %>
+          <%= game.black_player.name %> is playing black.
+        <% end %>
+        <% if user_signed_in? && (current_user == game.white_player || current_user == game.black_player) %>
+          <%= link_to "Delete game", game_path(game.id), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure? Deleted games cannot be recovered."} %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+    
+    	
+      
+
+      
+
+  
+    
 
 
 
 
+
+
+
+
+
+
+    
 

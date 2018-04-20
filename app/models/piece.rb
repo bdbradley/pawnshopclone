@@ -8,5 +8,13 @@ def color
   end
 
   def render
-    "blues-#{color}-#{type.downcase}.png"
+    "#{color}-#{type.downcase}.png"
   end
+end 
+
+PAWN = "Pawn".freeze
+ROOK = "Rook".freeze
+KNIGHT = "Knight".freeze
+BISHOP = "Bishop".freeze
+QUEEN = "Queen".freeze
+KING = "King".freeze

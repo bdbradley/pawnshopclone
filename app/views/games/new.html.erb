@@ -1,7 +1,9 @@
-<h1>Create Game</h1>
-<%= simple_form_for @game do |f| %>
-  <%= f.input :name %>
-  <br />
-
-  <%= f.submit 'Create', class: 'btn btn-danger' %>
-<% end %>  
+<div class="row .container-fluid">
+    <div class="col-12">
+      <% if user_signed_in? %>
+        <h1>Or you can create a new game playing as white and ask someone else to join you playing as black:</h1>
+        <%= link_to "Create new game", games_path(game: {white_player_id: current_user} ), method: :post, class: "btn btn-success" %>
+  	<% end %>
+	</div>
+</div>
+      

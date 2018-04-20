@@ -1,16 +1,14 @@
 class Game < ApplicationRecord
-  belongs_to :white_player, class_name: 'User'
-  belongs_to :black_player, class_name: 'User', optional: true
-
+  belongs_to :black_player, inverse_of: 'games', class_name: 'User', optional: true
+  belongs_to :white_player, inverse_of: 'games', class_name: 'User'
   has_many :pieces
-  scope :available, -> { where('user_white_id IS NULL OR user_black_id IS NULL') }
+
+  scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
 
   validates :name, :presence => true
 
   def populate_board!
-    # this should create all 32 Pieces with their initial X/Y coordinates. White pieces will be at bottom of board.
-
-    #White Player#
+    
     (1..8).each do |i|
       Piece.create(game_id: id, is_white: true, type: PAWN, x_position: i, y_position: 2)
     end
@@ -43,6 +41,15 @@ class Game < ApplicationRecord
 
     Piece.create(game_id: id, is_white: false, type: KING, x_position: 5, y_position: 8)
     Piece.create(game_id: id, is_white: false, type: QUEEN, x_position: 4, y_position: 8)
+  end
+
+  def render_piece(x_pos, y_pos)
+    piece = get_piece_at_coor(x_pos, y_pos)
+    piece.render if piece.present?
+  end
+
+  def get_piece_at_coor(x_pos, y_pos)
+    pieces.find_by(x_position: x_pos, y_position: y_pos)
   end
 
 end

@@ -7,28 +7,18 @@
     <div class="d-flex justify-content-center">
       <a class="navbar-brand" href="/">The Pawnshop</a>
     </div>
-  </div>
-
-
-
-  
-
+  </div>  
+      
   <div class="row">
     <div class="mx-auto">
-      <div class="btn btn-primary btn-lg">
-        <%= link_to 'Sign In', new_user_session_url, :class => "btn" %> 
-        <%= link_to 'Sign Up', new_user_registration_url, :class => "btn" %>
-        <%= link_to "Sign out", destroy_user_session_path, method: :delete, class:'btn btn-warning' %>
-      </div>
+      <button id="trigger" type="button" class="btn btn-primary btn-lg">Sign In</button>
     </div>
   </div>
       
-      
 
   <br>
-
       <div id="logIN" class="col-md-3 mx-auto login-sec">
-        <h2 class="text-center">SIGN IN</h2>
+        <h2 class="text-center">SIGN IN/UP</h2>
           <form class="login-form">
             <div class="form-group">
               <label for="exampleInputEmail1" class="text-uppercase">Username</label>
@@ -41,14 +31,24 @@
             <div class="col-md-12 mx-auto text-center">
               <a href="#">Forgot Password?</a>
             </div>
+              <br>    
+            <div class="col-md-12 mx-auto text-center">
+              <a href="/users/sign_up">New Here? Let's sign you up.</a>
+            </div>
               <br>
             <div class="col-md-12 mx-auto">
-              <a class="btn btn-primary btn-lg btn-block" id="login-button" href="/games/new" role="button">Log In</a>
+              <a class="btn btn-primary btn-lg btn-block" id="login-button" href="/games" role="button">Log In</a>
             </div>
           </form>
         </div>
       </div>
-    </div>
+    
+
+    
+
+
+  
+
   
     <!--Our Team-->
 
@@ -58,13 +58,13 @@
           <div class="row">
             <!--Rubber Duckie #1 -->
 
-            <div class="col-sm">
+            <div class="col-sm">`
               <div class="image-flip">
                 <div class="mainflip">
                   <div class="frontside">
                     <div class="card">
                       <div class="card-body text-center">
-                        <p><img class=" img-fluid" src="/assets/RyanandBrads.jpg" alt="Ryan Marks"></p>
+                        <p><img class=" img-fluid" src="/assets/RyanandBrads.jpg" alt="Ryan"></p>
                           <h4 class="card-title">Ryan Marks</h4>
                         <p class="card-text">This is basic card with image on top, title, description and button.</p>
                         <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
@@ -164,7 +164,7 @@
                   <div class="frontside">
                     <div class="card">
                     <div class="card-body text-center">
-                      <p><img class=" img-fluid" src="/assets/Barry.jpg" alt="card image"></p>
+                      <p><img class=" img-fluid" src="/assets/Barry.jpg" alt="Barry"></p>
                       <h4 class="card-title">Barry</h4>
                       <p class="card-text">This is basic card with image on top, title, description and button.</p>
                       <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
@@ -214,7 +214,7 @@
                   <div class="frontside">
                     <div class="card">
                     <div class="card-body text-center">
-                      <p><img class=" img-fluid" src="/assets/Nikko.jpg" alt="card image"></p>
+                      <p><img class=" img-fluid" src="/assets/Nikko.jpg" alt="Nikko"></p>
                       <h4 class="card-title">Nikko</h4>
                       <p class="card-text">This is basic card with image on top, title, description and button.</p>
                       <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
@@ -271,4 +271,37 @@
       
     
     
+  
+
+            
+                
+
+          
+          
+
+        
+            
+                    
+
+
+
+
+      
+      
+      
+
+      
+             
+     
+
+  
+  
+  
+
+
+   
+  
+      
+
+
   
