@@ -28,7 +28,17 @@
       <div class="card-header">
         <h3> Game: <%= game.name %> </h3>
       </div>
+      <div class="col-12">
+        <%= game.white_player.name %> is playing as white.
+      </div>
+      <%= link_to 'JOIN GAME', game_path(game.id), :class => 'btn' %>
       <% end %>
+    </div>
+    
+      
+        
+         
+          
      
       
     

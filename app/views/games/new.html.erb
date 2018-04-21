@@ -1,5 +1,12 @@
 <div class="booyah-box col-xs-8 col-xs-offset-2">
 	<h2>START A NEW GAME</h2><br>
-	<%=link_to 'Start game', games_path, :class => "btn", :method => 'POST' %> 
-</div>              
+	
+
+<%= simple_form_for @game do |f| %>
+  <%= f.input :name %>
+  <br />
+
+  <%=link_to 'Start game', games_path, :class => "btn", :method => 'POST' %> 
+<% end %>              
+                  
       

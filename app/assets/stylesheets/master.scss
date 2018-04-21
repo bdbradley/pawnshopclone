@@ -230,6 +230,37 @@ section .section-title {
     
     }
 
+    #chessboard {
+    width: 720px;
+    height: 720px;
+    margin: auto;
+}
+
+table td {
+    width: 90px;
+    height: 90px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 2px 0 5px 0;
+
+
+}
+
+
+
+.white {
+    background-color: white;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.black {
+    background-color: black;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+
 
 
 
