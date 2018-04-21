@@ -1,9 +1,5 @@
-<div class="row .container-fluid">
-    <div class="col-12">
-      <% if user_signed_in? %>
-        <h1>Or you can create a new game playing as white and ask someone else to join you playing as black:</h1>
-        <%= link_to "Create new game", games_path(game: {white_player_id: current_user} ), method: :post, class: "btn btn-success" %>
-  	<% end %>
-	</div>
-</div>
+<div class="booyah-box col-xs-8 col-xs-offset-2">
+	<h2>START A NEW GAME</h2><br>
+	<%=link_to 'Start game', games_path, :class => "btn", :method => 'POST' %> 
+</div>              
       

@@ -1,11 +1,12 @@
 class Game < ApplicationRecord
-  belongs_to :black_player, inverse_of: 'games', class_name: 'User', optional: true
-  belongs_to :white_player, inverse_of: 'games', class_name: 'User'
+  belongs_to :white_player, class_name: 'User'
+  belongs_to :black_player, class_name: 'User', optional: true
+
   has_many :pieces
 
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
-
-  validates :name, :presence => true
+  
+  
 
   def populate_board!
     
