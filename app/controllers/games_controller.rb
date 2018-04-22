@@ -29,8 +29,11 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-    @game.update_attributes(game_params)
-    flash[:notice] = "You successfully joined the game!"
+    if @game.black_player.nil?
+      @game.update(black_player_id: current_user.id)
+    else
+      @game.update(white_player_id: current_user.id)
+    end
     redirect_to game_path(@game)
     
   end 
