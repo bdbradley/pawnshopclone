@@ -4,6 +4,8 @@ class GamesController < ApplicationController
 
   def index
     @available_games = Game.available
+    @ongoing_games = Game.ongoing
+    
   end
 
   def new
@@ -15,8 +17,12 @@ class GamesController < ApplicationController
     @game.update_attributes(:white_player => current_user)
     @game.populate_board!
     redirect_to games_path
-    
-    
+  end
+
+  def destroy
+    @game = Game.find(params[:id])
+    @game.destroy
+    redirect_to games_path
   end
 
   def show

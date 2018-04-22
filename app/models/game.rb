@@ -5,6 +5,7 @@ class Game < ApplicationRecord
   has_many :pieces
 
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
+  scope :ongoing, -> { where.not('white_player_id IS NULL OR black_player_id IS NULL') }
 
   validates :name, :presence => true
   
