@@ -49,6 +49,15 @@
         <% end %>
       </tbody>
     </table>
+  </div>
+
+  <%
+=begin %>
+  <% if @game.white_player && @game.black_player != nil %>
+      <%= button_to "Forfeit", forfeit_game_path(@game), :class => "btn btn-success", :method => :patch %>
+  <% end %> 
+  <%
+=end %>
 
     <br />
     <%= button_to "Go back to index of games", games_path, :method => :get, :class => "btn btn-success" %>        

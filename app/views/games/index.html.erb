@@ -1,4 +1,4 @@
-		<div class="jumbotron">
+		<div class="card-header">
         <h1>Welcome back <%= current_user.name %>!</h1>
         <p class="lead">
         <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger' %>
@@ -16,6 +16,9 @@
         <%= link_to "Start a new game", new_game_path, class: "btn btn-success" %>
       </div>
     </div>
+    <br>
+    <br>
+    <br>
       
       
   
@@ -34,15 +37,17 @@
       <%= link_to "Join game as black", game_path(game.id), method: :put, class: "btn btn-success"%>
       <% end %>
     </div>
+    <br>
+    <br>
+    <br>
 
-    <h1>Here is a list of all the games that have two players and are currently ongoing:</h1>  
+
+    <div class="container-fluid">
+      <h1>Here is a list of all the games that have two players and are currently ongoing:</h1>  
       <% @ongoing_games.each do |game| %>
     <div class="card-header">
       <h3> Game: <%= game.name %> </h3>
     </div>
-    <div class="container-fluid">
-      
-      
       <div class="col-12">
         <% if current_user == game.white_player || current_user == game.black_player %>
           <%= link_to "Continue game", game_path(game.id), method: :get, class: "btn btn-success" %>
@@ -53,6 +58,12 @@
       </div>
     </div>
   <% end %>
+  <br>
+  <br>
+  <br>
+    
+      
+      
 
     
     

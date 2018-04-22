@@ -44,6 +44,13 @@ class GamesController < ApplicationController
     
   end 
 
+  def forfeit
+    @game = Game.find(params[:id])
+    @game.destroy
+    redirect_to game_path(@game)
+    
+  end
+
   private 
 
   def game_params

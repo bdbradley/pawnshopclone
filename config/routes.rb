@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     root 'pawnshops#index'
 
     
-    resources :games
+    resources :games do
+    	patch 'forfeit', on: :member
+  	end
     resources :pieces, only: [:update]
 
     
