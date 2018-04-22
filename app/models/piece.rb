@@ -12,6 +12,16 @@ def color
   end
 end 
 
+def square_occupied?(new_x, new_y)
+    piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
+    return false if piece.nil?
+    true
+  end
+
+def off_board?(new_x, new_y)
+    new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
+  end
+
 PAWN = "Pawn".freeze
 ROOK = "Rook".freeze
 KNIGHT = "Knight".freeze
