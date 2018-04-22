@@ -1,10 +1,9 @@
 		<div class="jumbotron">
-        <h1>Welcome back, trusted user!</h1>
+        <h1>Welcome back <%= current_user.name %>!</h1>
         <p class="lead">
-        You are currently signed in as <%= current_user.name %>  
-        </p>
         <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger' %>
     </div>
+        
       
       
       
@@ -31,7 +30,7 @@
       <div class="col-12">
         <%= game.white_player.name %> is playing as white.
       </div>
-      <%= link_to 'JOIN GAME', game_path(game.id), :class => 'btn' %>
+      <%= link_to "Join game as black", game_path(game.id), method: :put, class: "btn btn-success"%>
       <% end %>
     </div>
     
