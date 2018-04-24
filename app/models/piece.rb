@@ -2,6 +2,24 @@ class Piece < ApplicationRecord
   belongs_to :user
 	belongs_to :game
 
+  def move_to!(new_x, new_y)
+    occupied_square = square_occupied?(new_x, new_y)
+    if occupied_square && opposite_color_piece?(occupied_square)
+      move_piece(new_x, new_y)**************
+    elsif !piece_on_square
+      self.update_attributes(x_pos: to_x, y_pos: to_y)
+    end
+  end
+
+  def same_color_piece?(other_piece)
+    other_piece.color == self.color
+  end
+
+  def opposite_color_piece?(other_piece)
+    !same_color_piece?(other_piece)
+  end
+
+
 
   def is_obstructed?(x1, y1, x2, y2)
     vertical_move = x1 === x2
