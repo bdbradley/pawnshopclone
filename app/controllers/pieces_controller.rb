@@ -8,11 +8,11 @@ class PiecesController < ApplicationController
   #comment.find_by(user)
 
   def update
-  	@piece = Piece.find(params[:id])
-  	@game = @piece.game
-  	@piece.update_attributes
-  	@game.update
+  	
+  	piece_to_move = Piece.find(params[:id])
+  	piece_to_move.move_piece!(5,5)
   	redirect_to game_path
+  	
 	end 
 
 	

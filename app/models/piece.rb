@@ -13,8 +13,7 @@ belongs_to :game
 
   
 
-  def move_piece(new_x, new_y)
-    piece_to_move = game.get_piece_at_coor(2,2)
+  def move_piece!(new_x, new_y)
     update(x_position: new_x, y_position: new_y)
   end
 
