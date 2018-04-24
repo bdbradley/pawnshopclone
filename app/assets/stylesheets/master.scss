@@ -241,9 +241,25 @@ table td {
     height: 90px;
     vertical-align: middle;
     text-align: center;
-    padding: 2px 0 5px 0;
+}
 
+td:hover {
+  background-color: #ffa;
+}
 
+td {
+  position: relative;
+}
+td:hover::after,
+td:hover::after {
+  content: "";
+  position: absolute;
+  background-color: #ffa;
+  left: 0;
+  top: 0px;
+  height: 0px;
+  width: 100%;
+  z-index: -1;
 }
 
 

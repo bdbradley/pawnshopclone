@@ -47,7 +47,7 @@ class GamesController < ApplicationController
   def forfeit
     @game = Game.find(params[:id])
     @game.destroy
-    redirect_to game_path(@game)
+    redirect_to games_path(@game)
     
   end
 
@@ -58,3 +58,4 @@ class GamesController < ApplicationController
   end
 
   end
+    

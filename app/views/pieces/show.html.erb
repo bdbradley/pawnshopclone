@@ -1,3 +1,6 @@
+<h1>Pieces#show</h1>
+
+
 <div class="container justify-content-center">
   <h1>Welcome to Game<%=@game.id%></h1>
 </div>
@@ -16,10 +19,7 @@
       <p><%= @game.black_player.name %> is playing as black.</p>
     </div>
 
-    
-  
-
-  <div class="col-10 center offset-1">
+<div class="col-10 center offset-1">
     <table id="chessboard">
       <tbody>
         <% [8, 7, 6, 5, 4, 3, 2, 1].each do |row| %>
@@ -39,8 +39,10 @@
                 <% piece_image = @game.render_piece(col, row) %>
                 <% if piece_image.present? %>
 
+
+                  
                   <% piece = @game.get_piece_at_coor(col, row) %>
-                  <%= link_to piece_path do %>
+                  
                   <%= image_tag piece_image, :id => "piece", :data => {
                       :id => piece.id,
                       :color => (piece.is_white ? "white" : "black"),
@@ -48,7 +50,7 @@
                       :y => piece.y_position
                     }
                   %>
-                  <% end %>
+                  
                 <% end %>
               </td>
             <% end %>
@@ -57,21 +59,3 @@
       </tbody>
     </table>
   </div>
-
-  <%
-=begin %>
-  <% if @game.white_player && @game.black_player != nil %>
-      <%= button_to "Forfeit", forfeit_game_path(@game), :class => "btn btn-success", :method => :patch %>
-  <% end %> 
-  <%
-=end %>
-
-    <br />
-    <%= button_to "Go back to index of games", games_path, :method => :get, :class => "btn btn-success" %>        
-    <br /><br /><br /><br /><br /><br />
-    
-     
-
-                  
-
-                      

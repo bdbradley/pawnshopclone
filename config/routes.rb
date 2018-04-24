@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :games do
     	patch 'forfeit', on: :member
   	end
-    resources :pieces, only: [:update]
+    resources :pieces, only: [:show, :update]
 
     
   devise_for :users
