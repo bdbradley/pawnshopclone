@@ -40,7 +40,7 @@
                 <% if piece_image.present? %>
 
                   <% piece = @game.get_piece_at_coor(col, row) %>
-                  <%= link_to piece_path do %>
+                  <%= link_to piece_path(piece.id) do %>
                   <%= image_tag piece_image, :id => "piece", :data => {
                       :id => piece.id,
                       :color => (piece.is_white ? "white" : "black"),

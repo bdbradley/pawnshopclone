@@ -1,23 +1,12 @@
 <h1>Pieces#show</h1>
 
 
-<div class="container justify-content-center">
-  <h1>Welcome to Game<%=@game.id%></h1>
-</div>
-<br>
+
 
 <h1 class="text-center">The Pawnshop</h1>
 
   
-    <div id="currentUser" data-current-user-id=<%= current_user.id %>>
-      <p>You are logged in as <%= current_user.name %></p>
-    </div>
-    <div id="whitePlayer" data-user-white-id=<%= @game.white_player_id %>>
-      <p><%= @game.white_player.name %> is playing as white.</p>
-    </div>
-    <div id="blackPlayer" data-user-black-id=<%= @game.black_player_id %>>
-      <p><%= @game.black_player.name %> is playing as black.</p>
-    </div>
+    
 
 <div class="col-10 center offset-1">
     <table id="chessboard">
@@ -28,21 +17,18 @@
               <td
                 id=<%="#{col}#{row}"%>
               <% if (col + row).odd? %>
-                class="white"
+                class = "white"
               <% else %>
-                class="black"
+                class = "black"
               <% end %>
               >
-
               
-                
-                <% piece_image = @game.render_piece(col, row) %>
+             
+
+             <% piece_image = @game.render_piece(col, row) %>
                 <% if piece_image.present? %>
 
-
-                  
                   <% piece = @game.get_piece_at_coor(col, row) %>
-                  
                   <%= image_tag piece_image, :id => "piece", :data => {
                       :id => piece.id,
                       :color => (piece.is_white ? "white" : "black"),
@@ -50,8 +36,24 @@
                       :y => piece.y_position
                     }
                   %>
-                  
+
+
+                  <% if @piece.square_occupied?(col, row) == nil? %>
+                    <%= link_to game_path %>
+                  <% end %>
+
                 <% end %>
+    
+                  
+
+                
+
+
+              
+                
+                
+                  
+                
               </td>
             <% end %>
           </tr>

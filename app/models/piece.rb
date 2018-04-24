@@ -11,12 +11,10 @@ belongs_to :game
   	"#{color}-#{type.downcase}.png"
 	end
 
-  def get_piece_at_coor(x_pos, y_pos)
-    pieces.find_by(x_position: x_pos, y_position: y_pos)
-  end
+  
 
   def move_piece(new_x, new_y)
-    piece_to_move = game.get_piece_at_coor
+    piece_to_move = game.get_piece_at_coor(2,2)
     update(x_position: new_x, y_position: new_y)
   end
 
@@ -33,7 +31,7 @@ belongs_to :game
 end
 
 
- 
+
   
 
 
