@@ -11,11 +11,11 @@ belongs_to :game
   	"#{color}-#{type.downcase}.png"
 	end
 
-  def move_piece!(new_x, new_y)
-    update(x_position: new_x, y_position: new_y)
+  def move_piece!
+    update(x_position: 1, y_position: 1)
   end
 
-	def square_occupied?(new_x, new_y)
+  def square_occupied?(new_x, new_y)
     piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
     return false if piece.nil?
     true
