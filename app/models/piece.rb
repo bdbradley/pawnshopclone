@@ -133,6 +133,7 @@ belongs_to :game
         return true
       end
     end
+  end 
   
 
 end
