@@ -1,7 +1,29 @@
 class Piece < ApplicationRecord
-  belongs_to :user
-	belongs_to :game
 
+belongs_to :game
+
+	def color
+    return 'white' if is_white == true
+    'black'
+  end 
+
+  def render
+  	"#{color}-#{type.downcase}.png"
+	end
+
+  def move_piece!(new_x, new_y)
+    update(x_position: new_x, y_position: new_y)
+  end
+
+	def square_occupied?(new_x, new_y)
+    piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
+    return false if piece.nil?
+    true
+  end
+
+	def off_board?(new_x, new_y)
+    new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
+  end
 
   def is_obstructed?(x1, y1, x2, y2)
     vertical_move = x1 === x2
@@ -111,11 +133,26 @@ class Piece < ApplicationRecord
         return true
       end
     end
-  end
+  
+
 end
 
 
 
+
+  
+
+
+
+
+
+
+PAWN = "Pawn".freeze 
+ROOK = "Rook".freeze
+KNIGHT = "Knight".freeze
+BISHOP = "Bishop".freeze
+QUEEN = "Queen".freeze
+KING = "King".freeze
 
 # $board = [ 
 #   [nil, nil, nil, nil, nil, nil, nil, nil],
@@ -144,3 +181,4 @@ end
 # puts is_obstructed? 6, 4, 0, 4
 # puts is_obstructed? 4, 5, 2, 3
 # puts is_obstructed? 4, 3, 1, 6
+

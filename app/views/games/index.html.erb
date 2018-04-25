@@ -1,16 +1,95 @@
-<<<<<<< HEAD
-<h1>Create Game</h1>
-<% @games.each do |game| %>
-  <div>
-   <h1><%= link_to game.name, game_path(game) %></h1><br />
-    <i><%= game.name %></i><br />
-=======
-<h1>These Games Need You!!</h1>
-<% @games.each do |game| %>
-  <div>
-    <h1><%=game.name %></h1><br />
->>>>>>> 347b4ac3a05578df7d69eecdefa98d56afc8823d
-  </div>
+		<div class="card-header">
+        <h1>Welcome back <%= current_user.name %>!</h1>
+        <p class="lead">
+        <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger' %>
+        <%= link_to "Delete your registration", user_registration_path, method: :delete, class:'btn btn-danger' %>
+    </div>
+        
+      
+      
+      
 
-  <hr />
-<% end %>
+
+    <div class="container-fluid">
+      <div class="col-12">
+        <h1>Would you like to start a new game? Join a game as the white player and wait for your oppenent as the black player</h1>
+        <%= link_to "Start a new game", new_game_path, class: "btn btn-success" %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+      
+      
+  
+    <div class="container-fluid">
+      <div class="col-12">
+	     <h1>Open Games Available to Join:</h1>
+     </div>
+
+	     <% @available_games.each do |game| %>
+      <div class="card-header">
+        <h3> Game: <%= game.name %> </h3>
+      </div>
+      <div class="col-12">
+        <%= game.white_player.name %> is playing as white.
+      </div>
+      <%= link_to "Join game as black", game_path(game.id), method: :put, class: "btn btn-success"%>
+      <% end %>
+    </div>
+    <br>
+    <br>
+    <br>
+
+
+    <div class="container-fluid">
+      <h1>Here is a list of all the games that have two players and are currently ongoing:</h1>  
+      <% @ongoing_games.each do |game| %>
+    <div class="card-header">
+      <h3> Game: <%= game.name %> </h3>
+    </div>
+      <div class="col-12">
+        <% if current_user == game.white_player || current_user == game.black_player %>
+          <%= link_to "Continue game", game_path(game.id), method: :get, class: "btn btn-success" %>
+        <% end %>
+        <% if current_user == game.white_player || current_user == game.black_player %>
+          <%= link_to "Delete game", game_path(game.id), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure? Deleted games cannot be recovered."} %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <br>
+  <br>
+  <br>
+    
+      
+      
+
+    
+    
+      
+        
+         
+          
+     
+      
+    
+    	
+      
+
+      
+
+  
+    
+
+
+
+
+
+
+
+
+
+
+    
+

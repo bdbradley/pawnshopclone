@@ -1,23 +1,12 @@
-<div class="container justify-content-center">
-  <h1>Welcome to Game<%=@game.id%></h1>
-</div>
-<br>
+<h1>Pieces#show</h1>
+
+
+
 
 <h1 class="text-center">The Pawnshop</h1>
 
   
-    <div id="currentUser" data-current-user-id=<%= current_user.id %>>
-      <p>You are logged in as <%= current_user.name %></p>
-    </div>
-    <div id="whitePlayer" data-user-white-id=<%= @game.white_player_id %>>
-      <p><%= @game.white_player.name %> is playing as white.</p>
-    </div>
-    <div id="blackPlayer" data-user-black-id=<%= @game.black_player_id %>>
-      <p><%= @game.black_player.name %> is playing as black.</p>
-    </div>
-
     
-  
 
   <div class="col-10 center offset-1">
     <table id="chessboard">
@@ -38,7 +27,7 @@
 
                  
                   <% piece = @game.get_piece_at_coor(col, row) %>
-                    <%= link_to piece_path(piece.id) do %>
+                    
                       <%= image_tag piece_image, :id => "piece", :data => {
                           :id => piece.id,
                           :type => piece.type,
@@ -47,8 +36,10 @@
                           :y => piece.y_position
                         }
                       %>
+                 <% else %>
+                 <%= link_to "Move Here", piece_path, method: :put, class:'btn btn-secondary' %>     
 
-                    <% end %>
+                    
                   <% end %>
                 </td>
               <% end %>
@@ -57,16 +48,27 @@
         </tbody>
       </table>
 
-    <br />
-    <%= button_to "Go back to index of games", games_path, :method => :get, :class => "btn btn-success" %>        
-    <br />
+      <br>
+      <br>
+              
+              
+             
 
-
- 
+             
 
     
-     
+
 
                   
 
-                      
+    
+                  
+
+                
+
+
+              
+                
+                
+                  
+                
