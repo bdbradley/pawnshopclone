@@ -17,7 +17,7 @@ class Game < ApplicationRecord
   def populate_board!
     
     (1..8).each do |i|
-    Pawn.create(game_id: id, is_white: true, type: PAWN,  x_position: i, y_position: 2)
+      Piece.create(game_id: id, is_white: true, type: PAWN, x_position: i, y_position: 2)
     end
 
     Piece.create(game_id: id, is_white: true, type: ROOK, x_position: 1, y_position: 1)
@@ -34,7 +34,7 @@ class Game < ApplicationRecord
 
     #Black Player#
     (1..8).each do |i|
-    Pawn.create(game_id: id, is_white: false, type: PAWN, x_position: i, y_position: 2)
+      Piece.create(game_id: id, is_white: false, type: PAWN, x_position: i, y_position: 7)
     end
 
     Piece.create(game_id: id, is_white: false, type: ROOK, x_position: 1, y_position: 8)
@@ -53,7 +53,6 @@ class Game < ApplicationRecord
   def render_piece(x_pos, y_pos)
     piece = get_piece_at_coor(x_pos, y_pos)
     piece.render if piece.present?
-    
   end
 
   def get_piece_at_coor(x_pos, y_pos)

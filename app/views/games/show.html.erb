@@ -33,42 +33,37 @@
                 class="black"
               <% end %>
               >
-
-              
-                
                 <% piece_image = @game.render_piece(col, row) %>
                 <% if piece_image.present? %>
 
+                 
                   <% piece = @game.get_piece_at_coor(col, row) %>
-                  <%= link_to piece_path(piece.id) do %>
-                  <%= image_tag piece_image, :id => "piece", :data => {
-                      :id => piece.id,  
-                      :color => (piece.is_white ? "white" : "black"),
-                      :x => piece.x_position,
-                      :y => piece.y_position
-                    }
-                  %>
-                  <% end %>
-                <% end %>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+                    <%= link_to piece_path(piece.id) do %>
+                      <%= image_tag piece_image, :id => "piece", :data => {
+                          :id => piece.id,
+                          :type => piece.type,
+                          :color => (piece.is_white ? "white" : "black"),
+                          :x => piece.x_position,
+                          :y => piece.y_position
+                        }
+                      %>
 
-  <%
-=begin %>
-  <% if @game.white_player && @game.black_player != nil %>
-      <%= button_to "Forfeit", forfeit_game_path(@game), :class => "btn btn-success", :method => :patch %>
-  <% end %> 
-  <%
-=end %>
+                    <% end %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
     <br />
     <%= button_to "Go back to index of games", games_path, :method => :get, :class => "btn btn-success" %>        
-    <br /><br /><br /><br /><br /><br />
+    <br />
+
+
+ 
+
     
      
 

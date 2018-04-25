@@ -47,7 +47,7 @@ class GamesController < ApplicationController
   def forfeit
     @game = Game.find(params[:id])
     @game.destroy
-    redirect_to games_path(@game)
+    redirect_to game_path(@game)
     
   end
 
@@ -57,5 +57,4 @@ class GamesController < ApplicationController
       params.require(:game).permit(:name, :white_player, :black_player)
   end
 
-  end
-    
+end
