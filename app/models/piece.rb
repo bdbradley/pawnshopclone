@@ -1,22 +1,21 @@
 class Piece < ApplicationRecord
-  belongs_to :user
-	belongs_to :game
 
-  def move_to!(new_x, new_y)
-    if new_x !
 
-    occupied_square = square_occupied?(new_x, new_y)
-    if occupied_square && opposite_color_piece?
-      move_piece(new_x, new_y)**************
-    elsif !occupied_square
-      self.update_attributes(x_position: new_x, y_position: new_y)
-    end
-  end
+belongs_to :game
 
-  def move_piece(new_x, new_y)
-    piece_to_move = game.get_piece_at_coor(2,2)
+	def color
+    return 'white' if is_white == true
+    'black'
+  end 
+
+  def render
+  	"#{color}-#{type.downcase}.png"
+	end
+
+  def move_piece!(new_x, new_y)
+    transaction do
     update(x_position: new_x, y_position: new_y)
-  end
+    end
 
   def square_occupied?(new_x, new_y)
     piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
@@ -24,19 +23,9 @@ class Piece < ApplicationRecord
     true
   end
 
-  # in square occupied maybe if piece in square, return piece.
-
-
-
-  # def same_color_piece?(other_piece)
-  #   other_piece.color == self.color
-  # end
-
-  # def opposite_color_piece?(other_piece)
-  #   !same_color_piece?(other_piece)
-  # end
-
-
+	def off_board?(new_x, new_y)
+    new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
+  end
 
   def is_obstructed?(x1, y1, x2, y2)
     vertical_move = x1 === x2
@@ -146,11 +135,27 @@ class Piece < ApplicationRecord
         return true
       end
     end
-  end
+  end 
+  
+
 end
 
 
 
+
+  
+
+
+
+
+
+
+PAWN = "Pawn".freeze 
+ROOK = "Rook".freeze
+KNIGHT = "Knight".freeze
+BISHOP = "Bishop".freeze
+QUEEN = "Queen".freeze
+KING = "King".freeze
 
 # $board = [ 
 #   [nil, nil, nil, nil, nil, nil, nil, nil],
@@ -179,3 +184,4 @@ end
 # puts is_obstructed? 6, 4, 0, 4
 # puts is_obstructed? 4, 5, 2, 3
 # puts is_obstructed? 4, 3, 1, 6
+

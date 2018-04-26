@@ -16,7 +16,7 @@
 }
 
  .newgamebg {
- 	background: image_url('newgamescreen.jpeg') no-repeat center center;
+    background: image_url('newgamescreen.jpeg') no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -27,31 +27,33 @@
 }
 
 .nav-link {
-	color: white;
+    color: white;
 }
 
 .navbar-toggler {
-	color: white;
+    color: white;
 
 }
 
 .navbar-brand, a:hover {
-	color: #b2ae9e;
+    color: #b2ae9e;
 }
 
 .navbar-brand {
 
-	color: white;
-	font-size: 96px;
-	text-align: center;
-	font-family: 'Dancing Script', cursive;
+    color: white;
+    font-size: 96px;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
 
 }
 
 #trigger {
-	background-color: red;
-	width: 200px;
-	opacity: .73;
+    color: white;
+    background-color: red;
+    width: 200px;
+
+    
 
 
 }
@@ -81,8 +83,8 @@
 
 #team {
     background: #DE6262;  
-	background: -webkit-linear-gradient(to bottom, #3c3b3f, #605c3c);  
-	background: linear-gradient(to bottom, #3c3b3f, #605c3c); 
+    background: -webkit-linear-gradient(to bottom, #3c3b3f, #605c3c);  
+    background: linear-gradient(to bottom, #3c3b3f, #605c3c); 
 }
 
 .btn-primary:hover,
@@ -215,18 +217,66 @@ section .section-title {
 /* New Game Create Form */
 
 #login-button {
-	background-color: red;
-	color: white;
-	font-weight: 500;
-	align-content: center;
+    background-color: red;
+    color: white;
+    font-weight: 500;
+    align-content: center;
 }
 
 #logIN {
-	
-	display: none;
-	background: linear-gradient(to bottom right, #bdc3c7, #bdc3c7);
-	
-	}
+    
+    display: none;
+    background: linear-gradient(to bottom right, #bdc3c7, #bdc3c7);
+    
+    }
+
+    #chessboard {
+    width: 720px;
+    height: 720px;
+    margin: auto;
+}
+
+#empty-square {
+  
+}
+
+table td {
+    width: 90px;
+    height: 90px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+td:hover {
+  background-color: #ffa;
+}
+
+td {
+  position: relative;
+}
+td:hover::after,
+td:hover::after {
+  content: "";
+  position: absolute;
+  background-color: #ffa;
+  width: 100%;
+  z-index: -1;
+}
+
+
+
+.white {
+    background-color: white;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.black {
+    background-color: grey;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
 
 
 

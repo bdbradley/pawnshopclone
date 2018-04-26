@@ -15,9 +15,15 @@
 
   <div class="row">
     <div class="mx-auto">
-      <button id="trigger" type="button" class="btn btn-primary btn-lg">Sign In</button>
+      <div class="btn btn-primary btn-lg">
+        <%= link_to 'Sign In', new_user_session_path, :class => "btn" %> 
+        <%= link_to 'Sign Up', new_user_registration_path, :class => "btn" %>
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete, class:'btn btn-warning' %>
+      </div>
     </div>
   </div>
+      
+      
 
   <br>
 
@@ -47,16 +53,16 @@
     <!--Our Team-->
 
     <section id="team" class="pb-5">
-     	<div class="container">
-      	<h5 class="section-title h1">The Rubber Duckies</h5>
-       	  <div class="row">
+      <div class="container">
+        <h5 class="section-title h1">The Rubber Duckies</h5>
+          <div class="row">
             <!--Rubber Duckie #1 -->
 
-        		<div class="col-sm">
-      				<div class="image-flip">
-          			<div class="mainflip">
-            			<div class="frontside">
-            				<div class="card">
+            <div class="col-sm">
+              <div class="image-flip">
+                <div class="mainflip">
+                  <div class="frontside">
+                    <div class="card">
                       <div class="card-body text-center">
                         <p><img class=" img-fluid" src="/assets/RyanandBrads.jpg" alt="Ryan Marks"></p>
                           <h4 class="card-title">Ryan Marks</h4>
@@ -69,11 +75,11 @@
                     <div class="card">
                       <div class="card-body text-center mt-4">
                         <h4 class="card-title">About Ryan</h4>
-                          <p class="card-text">This is basic card with image on top, title, 	description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                          <p class="card-text">This is basic card with image on top, title,   description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
                           <ul class="list-inline">
-                          	<li class="list-inline-item">
-                            	<a class="social-icon text-xs-center" target="_blank" href="#">
-                              	<i class="fa fa-facebook"></i>
+                            <li class="list-inline-item">
+                              <a class="social-icon text-xs-center" target="_blank" href="#">
+                                <i class="fa fa-facebook"></i>
                               </a>
                             </li>
                             <li class="list-inline-item">
@@ -82,8 +88,8 @@
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                            	<a class="social-icon text-xs-center" target="_blank" href="#">
-                             		<i class="fa fa-skype"></i>
+                              <a class="social-icon text-xs-center" target="_blank" href="#">
+                                <i class="fa fa-skype"></i>
                               </a>
                             </li>
                             <li class="list-inline-item">
@@ -208,7 +214,7 @@
                   <div class="frontside">
                     <div class="card">
                     <div class="card-body text-center">
-                      <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+                      <p><img class=" img-fluid" src="/assets/Nikko.jpg" alt="card image"></p>
                       <h4 class="card-title">Nikko</h4>
                       <p class="card-text">This is basic card with image on top, title, description and button.</p>
                       <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
@@ -266,33 +272,3 @@
     
     
   
-
-            
-                
-
-          
-          
-
-        
-            
-                    
-
-
-
-
-      
-      
-      
-
-      
-             
-     
-
-  
-  
-  
-
-
-   
-  
-      
