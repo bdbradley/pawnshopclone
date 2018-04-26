@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-    root 'pawnshops#index'
+    root 'games#index'
 
     
     resources :games do
