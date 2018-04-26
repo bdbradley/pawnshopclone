@@ -6,13 +6,5 @@ class PawnshopsController < ApplicationController
    end 
 
 
-  	
-  
-
-  def new
-  end
-
-
-
-end 
+ end 
 

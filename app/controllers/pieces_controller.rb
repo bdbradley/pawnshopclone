@@ -10,14 +10,10 @@ class PiecesController < ApplicationController
   
 
   def update
-  	piece_to_move = Piece.find(params[:id])
-    @game = piece_to_move.game
-    piece_to_move.move_piece!
+  	@piece = Piece.find(params[:id])
+    @game = @piece.game
     redirect_to game_path(@game)
-  	
-  	
-  	
-	end 
+  end 
 
 	
 

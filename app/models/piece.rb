@@ -11,8 +11,10 @@ belongs_to :game
   	"#{color}-#{type.downcase}.png"
 	end
 
-  def move_piece!
-    update(x_position: 1, y_position: 5)
+  def move_piece!(new_x, new_y)
+    transaction do
+    update(x_position: new_x, y_position: new_y)
+    end
   end
 
   def square_occupied?(new_x, new_y)

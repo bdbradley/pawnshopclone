@@ -37,9 +37,11 @@
                         }
                       %>
                  <% else %>
-                 <%= link_to "Move Here", piece_path, method: :put, class:'btn btn-secondary' %>     
-
-                    
+                 
+                   <%= link_to "Move Here", piece_path(@piece), method: :put, class:'btn btn-secondary', :data => {:x_position => 2, :y_position  => 6}
+                   
+                        
+                  %>     
                   <% end %>
                 </td>
               <% end %>
@@ -50,6 +52,17 @@
 
       <br>
       <br>
+
+
+                          
+
+                  
+
+
+
+
+
+                    
               
               
              
