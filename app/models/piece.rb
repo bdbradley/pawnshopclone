@@ -12,7 +12,7 @@ belongs_to :game
 	end
 
   def move_piece!
-    update(x_position: 1, y_position: 1)
+    update(x_position: 1, y_position: 5)
   end
 
   def square_occupied?(new_x, new_y)
