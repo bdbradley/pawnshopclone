@@ -3,21 +3,38 @@ class Piece < ApplicationRecord
 	belongs_to :game
 
   def move_to!(new_x, new_y)
+    if new_x !
+
     occupied_square = square_occupied?(new_x, new_y)
-    if occupied_square && opposite_color_piece?(occupied_square)
+    if occupied_square && opposite_color_piece?
       move_piece(new_x, new_y)**************
-    elsif !piece_on_square
-      self.update_attributes(x_pos: to_x, y_pos: to_y)
+    elsif !occupied_square
+      self.update_attributes(x_position: new_x, y_position: new_y)
     end
   end
 
-  def same_color_piece?(other_piece)
-    other_piece.color == self.color
+  def move_piece(new_x, new_y)
+    piece_to_move = game.get_piece_at_coor(2,2)
+    update(x_position: new_x, y_position: new_y)
   end
 
-  def opposite_color_piece?(other_piece)
-    !same_color_piece?(other_piece)
+  def square_occupied?(new_x, new_y)
+    piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
+    return false if piece.nil?
+    true
   end
+
+  # in square occupied maybe if piece in square, return piece.
+
+
+
+  # def same_color_piece?(other_piece)
+  #   other_piece.color == self.color
+  # end
+
+  # def opposite_color_piece?(other_piece)
+  #   !same_color_piece?(other_piece)
+  # end
 
 
 
