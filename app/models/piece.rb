@@ -27,6 +27,22 @@ belongs_to :game
     new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
   end
 
+  def move_to!(new_x, new_y)
+    @moving_piece = self.piece
+    @moving_piece_x_position = self.x_position
+    @moving_piece_y_position = self.y_position
+    if (new_x != nil) && (new_y != nil)
+      @piece_at_destination = @game.pieces.find_by(x_position: new_x, y_position: new_y)
+      if self.color === @piece_at_destination.color
+        return "Error"
+      else
+        @piece_at_destination.update_attributes(x_position: nil, y_position: nil)
+        @moving_piece.update_attributes(x_position: new_x, y_position: new_y)
+      end
+    end
+    @moving_piece.update_attributes(x_position: new_x, y_position: new_y)
+  end
+
   def is_obstructed?(x1, y1, x2, y2)
     vertical_move = x1 === x2
     if vertical_move
@@ -136,17 +152,7 @@ belongs_to :game
       end
     end
   end 
-  
-
 end
-
-
-
-
-  
-
-
-
 
 
 
@@ -156,32 +162,3 @@ KNIGHT = "Knight".freeze
 BISHOP = "Bishop".freeze
 QUEEN = "Queen".freeze
 KING = "King".freeze
-
-# $board = [ 
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, 1,   nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil]
-# ]
-
-
-# # These should be fine
-# puts is_obstructed? 2, 2, 2, 5
-# puts is_obstructed? 2, 2, 5, 2
-# puts is_obstructed? 2, 2, 5, 5
-# puts is_obstructed? 5, 5, 2, 2
-# puts is_obstructed? 2, 5, 2, 2
-
-# # These should return false because of the 1 in the way
-# puts is_obstructed? 3, 2, 3, 6
-# puts is_obstructed? 0, 4, 6, 4
-# puts is_obstructed? 1, 2, 5, 6
-# puts is_obstructed? 3, 6, 3, 2
-# puts is_obstructed? 6, 4, 0, 4
-# puts is_obstructed? 4, 5, 2, 3
-# puts is_obstructed? 4, 3, 1, 6
-
