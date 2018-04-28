@@ -15,7 +15,7 @@ belongs_to :game
   def move_piece!(new_x, new_y)
     transaction do
     update(x_position: new_x, y_position: new_y)
-    end
+  end
 
   def square_occupied?(new_x, new_y)
     piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
