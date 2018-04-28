@@ -27,20 +27,22 @@ belongs_to :game
     new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
   end
 
+  def capture_piece!(captured_piece)
+    captured_piece.update(x_position: nil, y_position: nil)
+  end
+
   def move_to!(new_x, new_y)
-    @moving_piece = self.piece
-    @moving_piece_x_position = self.x_position
-    @moving_piece_y_position = self.y_position
-    if (new_x != nil) && (new_y != nil)
-      @piece_at_destination = @game.pieces.find_by(x_position: new_x, y_position: new_y)
-      if self.color === @piece_at_destination.color
-        return "Error"
+    if square_occupied?(new_x, new_y)
+      piece_in_square = game.get_piece_at_coor(new_x, new_y)
+      if piece_in_square.color === self.color
+        raise ArgumentError, 'Invalid move. Cannot capture your own piece.'
       else
-        @piece_at_destination.update_attributes(x_position: nil, y_position: nil)
-        @moving_piece.update_attributes(x_position: new_x, y_position: new_y)
+        capture_piece(piece_in_square)
+        self.update(x_position: new_x, y_position: new_y)
       end
+    else
+      self.update(x_position: new_x, y_position: new_y)
     end
-    @moving_piece.update_attributes(x_position: new_x, y_position: new_y)
   end
 
   def is_obstructed?(x1, y1, x2, y2)
