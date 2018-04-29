@@ -153,7 +153,24 @@ belongs_to :game
         return true
       end
     end
-  end 
+  end
+
+  def valid_move?(new_x, new_y)
+    if square_occupied?(new_x, new_y) && self.color === game.get_piece_at_coor(new_x, new_y).color
+        return false
+    elsif
+      self.is_obstructed?(new_x, new_y)
+      return false
+    elsif
+      new_x === self.x_position && new_y === self.y_position
+      return false
+    else
+      off_board?(new_x new_y)
+      return false
+    end
+    return true
+  end
+
 end
 
 
