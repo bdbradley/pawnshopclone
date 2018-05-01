@@ -6,3 +6,6 @@ class Rook < Piece
     !off_board?(new_x new_y)
   end
 end
+    
+
+  
