@@ -17,37 +17,37 @@ class Game < ApplicationRecord
   def populate_board!
     
     (1..8).each do |i|
-      Piece.create(game_id: id, is_white: true, type: PAWN, x_position: i, y_position: 2)
+      Pawn.create(game_id: id, is_white: true, x_position: i, y_position: 2)
     end
 
-    Piece.create(game_id: id, is_white: true, type: ROOK, x_position: 1, y_position: 1)
-    Piece.create(game_id: id, is_white: true, type: ROOK, x_position: 8, y_position: 1)
+    Rook.create(game_id: id, is_white: true, x_position: 1, y_position: 1)
+    Rook.create(game_id: id, is_white: true,  x_position: 8, y_position: 1)
 
-    Piece.create(game_id: id, is_white: true, type: KNIGHT, x_position: 2, y_position: 1)
-    Piece.create(game_id: id, is_white: true, type: KNIGHT, x_position: 7, y_position: 1)
+    Knight.create(game_id: id, is_white: true,  x_position: 2, y_position: 1)
+    Knight.create(game_id: id, is_white: true,  x_position: 7, y_position: 1)
 
-    Piece.create(game_id: id, is_white: true, type: BISHOP, x_position: 3, y_position: 1)
-    Piece.create(game_id: id, is_white: true, type: BISHOP, x_position: 6, y_position: 1)
+    Bishop.create(game_id: id, is_white: true, x_position: 3, y_position: 1)
+    Bishop.create(game_id: id, is_white: true, x_position: 6, y_position: 1)
 
-    Piece.create(game_id: id, is_white: true, type: KING, x_position: 4, y_position: 1)
-    Piece.create(game_id: id, is_white: true, type: QUEEN, x_position: 5, y_position: 1)
+    King.create(game_id: id, is_white: true, x_position: 4, y_position: 1)
+    Queen.create(game_id: id, is_white: true, x_position: 5, y_position: 1)
 
     #Black Player#
     (1..8).each do |i|
-      Piece.create(game_id: id, is_white: false, type: PAWN, x_position: i, y_position: 7)
+      Pawn.create(game_id: id, is_white: false, x_position: i, y_position: 7)
     end
 
-    Piece.create(game_id: id, is_white: false, type: ROOK, x_position: 1, y_position: 8)
-    Piece.create(game_id: id, is_white: false, type: ROOK, x_position: 8, y_position: 8)
+    Rook.create(game_id: id, is_white: false, x_position: 1, y_position: 8)
+    Rook.create(game_id: id, is_white: false, x_position: 8, y_position: 8)
 
-    Piece.create(game_id: id, is_white: false, type: KNIGHT, x_position: 2, y_position: 8)
-    Piece.create(game_id: id, is_white: false, type: KNIGHT, x_position: 7, y_position: 8)
+    Knight.create(game_id: id, is_white: false, x_position: 2, y_position: 8)
+    Knight.create(game_id: id, is_white: false, x_position: 7, y_position: 8)
 
-    Piece.create(game_id: id, is_white: false, type: BISHOP, x_position: 3, y_position: 8)
-    Piece.create(game_id: id, is_white: false, type: BISHOP, x_position: 6, y_position: 8)
+    Bishop.create(game_id: id, is_white: false, x_position: 3, y_position: 8)
+    Bishop.create(game_id: id, is_white: false, x_position: 6, y_position: 8)
 
-    Piece.create(game_id: id, is_white: false, type: KING, x_position: 5, y_position: 8)
-    Piece.create(game_id: id, is_white: false, type: QUEEN, x_position: 4, y_position: 8)
+    King.create(game_id: id, is_white: false, x_position: 5, y_position: 8)
+    Queen.create(game_id: id, is_white: false, x_position: 4, y_position: 8)
   end
 
   def render_piece(x_pos, y_pos)
