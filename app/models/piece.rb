@@ -1,19 +1,18 @@
 class Piece < ApplicationRecord
+  belongs_to :game
 
-belongs_to :game
-
-	def color
+  def color
     return 'white' if is_white == true
     'black'
-  end 
+   end
 
   def render
-  	"#{color}-#{type.downcase}.png"
-	end
+    "#{color}-#{type.downcase}.png"
+    end
 
   def move_piece!(new_x, new_y)
     transaction do
-    update(x_position: new_x, y_position: new_y)
+      update(x_position: new_x, y_position: new_y)
     end
   end
 
@@ -23,14 +22,33 @@ belongs_to :game
     true
   end
 
-	def off_board?(new_x, new_y)
-    new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
+  # stubs to make Rspec work
+  def valid_move?(_new_x, _new_y)
+    true
   end
+
+  def horizontal_move?(_new_x, _new_y)
+    true
+  end
+
+  def vertical_move?(_new_x, _new_y)
+    true
+  end
+
+  def diagonal_move?(_new_x, _new_y)
+    true
+  end
+
+	# end stubs
+
+  def off_board?(new_x, new_y)
+    new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
+   end
 
   def is_obstructed?(x1, y1, x2, y2)
     vertical_move = x1 === x2
     if vertical_move
-      if (y1 < y2)
+      if y1 < y2
         small_y = y1
         big_y = y2
       else
@@ -40,19 +58,19 @@ belongs_to :game
 
       i = small_y + 1
 
-      while i < big_y  do
-        if ($board[x1][i] === nil)
-          i +=1
+      while i < big_y
+        if $board[x1][i].nil?
+          i += 1
         else
           return false
         end
       end
       return true
     end
-    
+
     horizontal_move = y1 === y2
     if horizontal_move
-      if (x1 < x2)
+      if x1 < x2
         small_x = x1
         big_x = x2
       else
@@ -62,28 +80,25 @@ belongs_to :game
 
       i = small_x + 1
 
-      while i < big_x do
-        if ($board[i][y1] === nil)
-          i +=1
+      while i < big_x
+        if $board[i][y1].nil?
+          i += 1
         else
           return false
         end
       end
       return true
     end
-    
-    
+
     diagonal_move = (x1 != x2) && (y1 != y2)
     if diagonal_move
-      if (x1 - x2).abs != (y1 - y2).abs
-        raise "Invalid move"
-      end
-      
-      if ((x1 < x2) && (y1 < y2)) 
+      raise 'Invalid move' if (x1 - x2).abs != (y1 - y2).abs
+
+      if (x1 < x2) && (y1 < y2)
         x = x1 + 1
         y = y1 + 1
-        while x < x2 do
-          if ($board[x][y] === nil)
+        while x < x2
+          if $board[x][y].nil?
             x += 1
             y += 1
           else
@@ -93,11 +108,11 @@ belongs_to :game
         return true
       end
 
-      if ((x1 < x2) && (y1 > y2)) 
+      if (x1 < x2) && (y1 > y2)
         x = x1 + 1
         y = y1 - 1
-        while x < x2 do
-          if ($board[x][y] === nil)
+        while x < x2
+          if $board[x][y].nil?
             x += 1
             y -= 1
           else
@@ -107,11 +122,11 @@ belongs_to :game
         return true
       end
 
-      if ((x1 > x2) && (y1 < y2)) 
+      if (x1 > x2) && (y1 < y2)
         x = x1 - 1
         y = y1 + 1
-        while x > x2 do
-          if ($board[x][y] === nil)
+        while x > x2
+          if $board[x][y].nil?
             x -= 1
             y += 1
           else
@@ -121,11 +136,11 @@ belongs_to :game
         return true
       end
 
-      if ((x1 > x2) && (y1 > y2)) 
+      if (x1 > x2) && (y1 > y2)
         x = x1 - 1
         y = y1 - 1
-        while x > x2 do
-          if ($board[x][y] === nil)
+        while x > x2
+          if $board[x][y].nil?
             x -= 1
             y -= 1
           else
@@ -135,29 +150,17 @@ belongs_to :game
         return true
       end
     end
-  end 
-  
-
+  end
 end
 
+PAWN = 'Pawn'.freeze
+ROOK = 'Rook'.freeze
+KNIGHT = 'Knight'.freeze
+BISHOP = 'Bishop'.freeze
+QUEEN = 'Queen'.freeze
+KING = 'King'.freeze
 
-
-
-  
-
-
-
-
-
-
-PAWN = "Pawn".freeze 
-ROOK = "Rook".freeze
-KNIGHT = "Knight".freeze
-BISHOP = "Bishop".freeze
-QUEEN = "Queen".freeze
-KING = "King".freeze
-
-# $board = [ 
+# $board = [
 #   [nil, nil, nil, nil, nil, nil, nil, nil],
 #   [nil, nil, nil, nil, nil, nil, nil, nil],
 #   [nil, nil, nil, nil, nil, nil, nil, nil],
@@ -167,7 +170,6 @@ KING = "King".freeze
 #   [nil, nil, nil, nil, nil, nil, nil, nil],
 #   [nil, nil, nil, nil, nil, nil, nil, nil]
 # ]
-
 
 # # These should be fine
 # puts is_obstructed? 2, 2, 2, 5
@@ -184,4 +186,3 @@ KING = "King".freeze
 # puts is_obstructed? 6, 4, 0, 4
 # puts is_obstructed? 4, 5, 2, 3
 # puts is_obstructed? 4, 3, 1, 6
-
