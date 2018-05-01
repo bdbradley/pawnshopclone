@@ -155,12 +155,3 @@ belongs_to :game
     end
   end 
 end
-
-
-
-PAWN = "Pawn".freeze 
-ROOK = "Rook".freeze
-KNIGHT = "Knight".freeze
-BISHOP = "Bishop".freeze
-QUEEN = "Queen".freeze
-KING = "King".freeze
