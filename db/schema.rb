@@ -53,11 +53,11 @@ ActiveRecord::Schema.define(version: 20180501033402) do
     t.integer  "y_position"
     t.string   "color"
     t.string   "image"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "game_id"
     t.boolean  "is_white"
-    t.boolean  "piece_moved"
+    t.boolean  "piece_moved", default: false
     t.index ["game_id"], name: "index_pieces_on_game_id", using: :btree
   end
 
