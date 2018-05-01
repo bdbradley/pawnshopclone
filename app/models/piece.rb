@@ -1,5 +1,6 @@
 class Piece < ApplicationRecord
 
+
 belongs_to :game
 
 	def color
@@ -14,7 +15,6 @@ belongs_to :game
   def move_piece!(new_x, new_y)
     transaction do
     update(x_position: new_x, y_position: new_y)
-    end
   end
 
   def square_occupied?(new_x, new_y)
@@ -25,6 +25,24 @@ belongs_to :game
 
 	def off_board?(new_x, new_y)
     new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
+  end
+
+  def capture_piece!(captured_piece)
+    captured_piece.update(x_position: nil, y_position: nil)
+  end
+
+  def move_to!(new_x, new_y)
+    if square_occupied?(new_x, new_y)
+      piece_in_square = game.get_piece_at_coor(new_x, new_y)
+      if piece_in_square.color === self.color
+        raise ArgumentError, 'Invalid move. Cannot capture your own piece.'
+      else
+        capture_piece(piece_in_square)
+        self.update(x_position: new_x, y_position: new_y)
+      end
+    else
+      self.update(x_position: new_x, y_position: new_y)
+    end
   end
 
   def is_obstructed?(x1, y1, x2, y2)
@@ -136,17 +154,7 @@ belongs_to :game
       end
     end
   end 
-  
-
 end
-
-
-
-
-  
-
-
-
 
 
 
@@ -156,32 +164,3 @@ KNIGHT = "Knight".freeze
 BISHOP = "Bishop".freeze
 QUEEN = "Queen".freeze
 KING = "King".freeze
-
-# $board = [ 
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, 1,   nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil],
-#   [nil, nil, nil, nil, nil, nil, nil, nil]
-# ]
-
-
-# # These should be fine
-# puts is_obstructed? 2, 2, 2, 5
-# puts is_obstructed? 2, 2, 5, 2
-# puts is_obstructed? 2, 2, 5, 5
-# puts is_obstructed? 5, 5, 2, 2
-# puts is_obstructed? 2, 5, 2, 2
-
-# # These should return false because of the 1 in the way
-# puts is_obstructed? 3, 2, 3, 6
-# puts is_obstructed? 0, 4, 6, 4
-# puts is_obstructed? 1, 2, 5, 6
-# puts is_obstructed? 3, 6, 3, 2
-# puts is_obstructed? 6, 4, 0, 4
-# puts is_obstructed? 4, 5, 2, 3
-# puts is_obstructed? 4, 3, 1, 6
-

@@ -6,13 +6,15 @@ rvm:
  - rbx-3
 
 
-
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database pawnshop_test  ;' -U postgres
 
 # Configure to use Code Climate
-#addons:
-#  postgresql: "9.4"
-#  code_climate:
-#    repo_token: ENV["code_climate_token"]
+addons:
+  postgresql: "9.4"
+  code_climate:
+    repo_token: ENV["code_climate_token"]
 # regular test configuration
-#after_success:
-#  - bundle exec codeclimate-test-reporter
+after_success:
+  - bundle exec codeclimate-test-reporter
