@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180502195018) do
+ActiveRecord::Schema.define(version: 20180502221222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20180502195018) do
     t.integer  "player_win"
     t.integer  "player_lose"
     t.boolean  "white_player_turn", default: true
+    t.integer  "state",             default: 0,    null: false
     t.index ["black_player_id"], name: "index_games_on_black_player_id", using: :btree
     t.index ["white_player_id"], name: "index_games_on_white_player_id", using: :btree
   end

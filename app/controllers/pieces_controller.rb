@@ -12,7 +12,8 @@ class PiecesController < ApplicationController
   def update
     @piece = Piece.find(params[:id])
     @game = @piece.game
-    @piece.update_attributes!(:x_position => params[:new_x], :y_position => params[:new_y])
+    @piece.move_to!(:x_position => params[:new_x], :y_position => params[:new_y])
+    @game.update(white_player_turn: !@game.white_player_turn)
     redirect_to game_path(@game)
   end 
 
