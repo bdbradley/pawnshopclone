@@ -1,14 +1,12 @@
 class Piece < ApplicationRecord
   belongs_to :game
 
-<<<<<<< HEAD
-
     belongs_to :game
 
   	def color
       return 'white' if is_white == true
       'black'
-    end 
+    end
 
     def render
     	"#{color}-#{type.downcase}.png"
@@ -24,7 +22,7 @@ class Piece < ApplicationRecord
       return false if piece.nil?
       true
     end
-=======
+
   def color
     return 'white' if is_white == true
     'black'
@@ -46,7 +44,7 @@ class Piece < ApplicationRecord
     true
   end
 
-  # stubs to make Rspec work
+  # stubs to make Rspec work, this can possibly be updated if we refactor
   def valid_move?(_new_x, _new_y)
     true
   end
@@ -79,14 +77,11 @@ class Piece < ApplicationRecord
         small_y = y2
         big_y = y1
       end
->>>>>>> ls_rspec_wk4
 
-
-<<<<<<< HEAD
     def own_piece_at_destination?(new_x, new_y)
       square_occupied?(new_x, new_y) && self.color === game.get_piece_at_coor(new_x, new_y).color
     end
-=======
+
       while i < big_y
         if $board[x1][i].nil?
           i += 1
@@ -106,13 +101,13 @@ class Piece < ApplicationRecord
         small_x = x2
         big_x = x1
       end
->>>>>>> ls_rspec_wk4
+
 
 	  def off_board?(new_x, new_y)
       new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
     end
 
-<<<<<<< HEAD
+
     def capture_piece!(captured_piece)
       captured_piece.update(x_position: nil, y_position: nil)
     end
@@ -122,11 +117,11 @@ class Piece < ApplicationRecord
         piece_in_square = game.get_piece_at_coor(new_x, new_y)
         if piece_in_square.color === self.color
           raise ArgumentError, 'Invalid move. Cannot capture your own piece.'
-=======
+
       while i < big_x
         if $board[i][y1].nil?
           i += 1
->>>>>>> ls_rspec_wk4
+
         else
           capture_piece(piece_in_square)
           self.update(x_position: new_x, y_position: new_y)
@@ -136,7 +131,7 @@ class Piece < ApplicationRecord
       end
     end
 
-<<<<<<< HEAD
+
     def is_obstructed?(x1, y1, x2, y2)
       vertical_move = x1 === x2
       if vertical_move
@@ -146,7 +141,7 @@ class Piece < ApplicationRecord
         else
           small_y = y2
           big_y = y1
-=======
+
     diagonal_move = (x1 != x2) && (y1 != y2)
     if diagonal_move
       raise 'Invalid move' if (x1 - x2).abs != (y1 - y2).abs
@@ -161,16 +156,16 @@ class Piece < ApplicationRecord
           else
             return false
           end
->>>>>>> ls_rspec_wk4
+
         end
 
-<<<<<<< HEAD
+
         i = small_y + 1
 
         while i < big_y  do
           if ($board[x1][i] === nil)
             i +=1
-=======
+
       if (x1 < x2) && (y1 > y2)
         x = x1 + 1
         y = y1 - 1
@@ -178,14 +173,14 @@ class Piece < ApplicationRecord
           if $board[x][y].nil?
             x += 1
             y -= 1
->>>>>>> ls_rspec_wk4
+
           else
             return false
           end
         end
         return true
       end
-      
+
       horizontal_move = y1 === y2
       if horizontal_move
         if (x1 < x2)
@@ -198,11 +193,11 @@ class Piece < ApplicationRecord
 
         i = small_x + 1
 
-<<<<<<< HEAD
+
         while i < big_x do
           if ($board[i][y1] === nil)
             i +=1
-=======
+
       if (x1 > x2) && (y1 < y2)
         x = x1 - 1
         y = y1 + 1
@@ -210,23 +205,22 @@ class Piece < ApplicationRecord
           if $board[x][y].nil?
             x -= 1
             y += 1
->>>>>>> ls_rspec_wk4
+
           else
             return false
           end
         end
         return true
       end
-<<<<<<< HEAD
-      
-      
+
+
       diagonal_move = (x1 != x2) && (y1 != y2)
       if diagonal_move
         if (x1 - x2).abs != (y1 - y2).abs
           raise "Invalid move"
         end
-        
-        if ((x1 < x2) && (y1 < y2)) 
+
+        if ((x1 < x2) && (y1 < y2))
           x = x1 + 1
           y = y1 + 1
           while x < x2 do
@@ -236,7 +230,7 @@ class Piece < ApplicationRecord
             else
               return false
             end
-=======
+
 
       if (x1 > x2) && (y1 > y2)
         x = x1 - 1
@@ -247,13 +241,13 @@ class Piece < ApplicationRecord
             y -= 1
           else
             return false
->>>>>>> ls_rspec_wk4
+
           end
           return true
         end
-<<<<<<< HEAD
 
-        if ((x1 < x2) && (y1 > y2)) 
+
+        if ((x1 < x2) && (y1 > y2))
           x = x1 + 1
           y = y1 - 1
           while x < x2 do
@@ -267,7 +261,7 @@ class Piece < ApplicationRecord
           return true
         end
 
-        if ((x1 > x2) && (y1 < y2)) 
+        if ((x1 > x2) && (y1 < y2))
           x = x1 - 1
           y = y1 + 1
           while x > x2 do
@@ -281,7 +275,7 @@ class Piece < ApplicationRecord
           return true
         end
 
-        if ((x1 > x2) && (y1 > y2)) 
+        if ((x1 > x2) && (y1 > y2))
           x = x1 - 1
           y = y1 - 1
           while x > x2 do
@@ -295,9 +289,9 @@ class Piece < ApplicationRecord
           return true
         end
       end
-    end 
+    end
   end
-=======
+
         return true
       end
     end
