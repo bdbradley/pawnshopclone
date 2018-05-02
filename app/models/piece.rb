@@ -23,7 +23,12 @@ class Piece < ApplicationRecord
       true
     end
 
-  	def off_board?(new_x, new_y)
+
+    def own_piece_at_destination?(new_x, new_y)
+      square_occupied?(new_x, new_y) && self.color === game.get_piece_at_coor(new_x, new_y).color
+    end
+
+	  def off_board?(new_x, new_y)
       new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
     end
 
@@ -155,4 +160,3 @@ class Piece < ApplicationRecord
       end
     end 
   end
-end
