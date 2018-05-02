@@ -23,6 +23,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @game.destroy
     redirect_to games_path
+    
   end
 
   def show
@@ -46,8 +47,9 @@ class GamesController < ApplicationController
 
   def forfeit
     @game = Game.find(params[:id])
+    @game.update(player_lose: current_user.id, white_player_turn: nil)
     @game.destroy
-    redirect_to game_path(@game)
+    redirect_to games_path, :notice => "Game Has Been Forfeited!" 
     
   end
 
