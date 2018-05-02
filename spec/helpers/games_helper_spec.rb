@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 # Specs in this file have access to a helper object that includes
 # the GamesHelper. For example:
 #
@@ -14,7 +15,6 @@ RSpec.describe GamesHelper, type: :helper do
 
 end
 
-
 RSpec.configure do |config|
-    config.include Devise::Test::ControllerHelpers, type: :controller
-  end
+  config.include Devise::Test::ControllerHelpers, type: :controller
+end

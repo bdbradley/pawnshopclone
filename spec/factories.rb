@@ -1,32 +1,45 @@
 FactoryBot.define do
+  factory :piece do
+    game
 
-  factory :queen do
   end
 
-  factory :king do
+  factory :queen, parent: :piece do
+
   end
 
-  factory :bishop do
+  factory :king, parent: :piece do
   end
 
-  factory :knight do
+  factory :bishop, parent: :piece do
   end
 
-  factory :rook do
+  factory :knight, parent: :piece do
   end
 
-  factory :pawn do
+  factory :rook, parent: :piece do
+  end
+
+  factory :pawn, parent: :piece do
   end
 
   factory :game do
+    association :white_player, factory: :user
+    association :black_player, factory: :user
+    sequence :name do |n|
+      "Game Name #{n}"
+    end
   end
 
   factory :user do
+    sequence :name do |n|
+      "User Name #{n}"
+    end
+
     sequence :email do |n|
       "dummyEmail#{n}@gmail.com"
     end
-    password "secretPassword"
-    password_confirmation "secretPassword"
+    password 'secretPassword'
+    password_confirmation 'secretPassword'
   end
-  
 end
