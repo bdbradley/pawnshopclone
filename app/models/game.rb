@@ -9,11 +9,6 @@ class Game < ApplicationRecord
 
   validates :name, :presence => true
 
-  
-  
-  
-  
-
   def populate_board!
     
     (1..8).each do |i|
