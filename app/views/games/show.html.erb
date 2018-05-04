@@ -15,6 +15,12 @@
     <div id="blackPlayer" data-user-black-id=<%= @game.black_player_id %>>
       <p><%= @game.black_player.name %> is playing as black.</p>
     </div>
+      
+
+
+      
+      
+      
 
     
   
@@ -61,6 +67,13 @@
     <br />
     <%= button_to "Go back to index of games", games_path, :method => :get, :class => "btn btn-success" %>        
     <br />
+
+    <% if current_user == @game.white_player || current_user == @game.black_player %>
+      <%= link_to "Forfeit Game", forfeit_game_path(@game), :class => "btn btn-danger", :method => :patch,  data: {confirm: "Are you sure? Forfeited games cannot be recovered."} %>
+    <% end %> 
+    
+        
+    
 
 
  
