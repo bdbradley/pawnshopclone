@@ -59,4 +59,24 @@ class Game < ApplicationRecord
     pieces.find_by(x_position: x_pos, y_position: y_pos)
   end
 
+  def enemy_king(is_white)
+    pieces.find_by(type: KING, is_white: !is_white)
+  end
+
+  def your_king(is_white)
+    pieces.find_by(type: KING, is_white: is_white)
+  end
+
+  def check?(is_white)
+    piece_under_attack?(is_white, your_king(is_white).x_position, your_king(is_white).y_position)
+  end
+
+  def forfeit(current_user)
+    if current_user.id == white_player_id
+      update!(player_win: black_player_id, player_lose: white_player_id)
+    elsif current_user.id == black_player_id
+      update!(player_win: white_player_id, player_lose: black_player_id)
+    end
+  end
+
 end

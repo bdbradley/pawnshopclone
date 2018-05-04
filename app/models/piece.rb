@@ -24,7 +24,24 @@ class Piece < ApplicationRecord
   
   def render
     "#{color}-#{type.downcase}.png"
+  end
+
+  def move_to!(new_x, new_y)
+    transaction do 
+      unless real_move?(new_x, new_y)
+        raise ArgumentError, "#{type} has not moved."
+      end
+      unless valid_move?(new_x, new_y)
+        raise ArgumentError, "Invalid move for #{type}"
+      end
+      if square_occupied?(new_x, new_y)
+        occupying_piece = game.get_piece_at_coor(new_x, new_y)
+        raise ArgumentError, 'That is an invalid move. Cannot capture your own piece.' if (occupying_piece.is_white && is_white?) || (!occupying_piece.is_white && !is_white?)
+        capture_piece(occupying_piece)
+      end
+      update(x_position: new_x, y_position: new_y)
     end
+  end 
 
   def square_occupied?(new_x, new_y)
     piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
@@ -40,18 +57,24 @@ class Piece < ApplicationRecord
     captured_piece.update(x_position: nil, y_position: nil)
   end
 
+  def real_move?(new_x, new_y)
+    piece_found = game.get_piece_at_coor(new_x, new_y)
+    return true if piece_found.nil?
+    return false if piece_found.id == id
+    true
+  end
 
-  def move_to!(new_x, new_y)
-    if square_occupied?(new_x, new_y)
-       piece_in_square = game.get_piece_at_coor(new_x, new_y)
-    if (occupying_piece.is_white && is_white?) || (!occupying_piece.is_white && !is_white?)
-       raise ArgumentError, 'Invalid move. Cannot capture your own piece.' 
-    else
-       capture_piece!(occupying_piece)
-    end
-       update(x_position: new_x, y_position: new_y)
-    end
-  end 
+  def count_moves
+    game.update(move_number: game.move_number + 1)
+    update(game_move_number: game.move_number, piece_move_number: piece_move_number + 1)
+    update(has_moved: true)
+  end
+
+  
+
+
+  
+      
 
   # stubs to make Rspec work, this can possibly be updated if we refactor
   def valid_move?(_new_x, _new_y)
@@ -298,3 +321,4 @@ end
 
   
 
+end
