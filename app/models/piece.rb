@@ -15,13 +15,13 @@ class Piece < ApplicationRecord
       unless real_move?(new_x, new_y)
         raise ArgumentError, "#{type} has not moved."
       end
-      unless valid_move?(new_x, new_y)
-        raise ArgumentError, "Invalid move for #{type}"
-      end
+      #unless valid_move?(new_x, new_y)
+        #raise ArgumentError, "Invalid move for #{type}"
+      #end
       if square_occupied?(new_x, new_y)
         occupying_piece = game.get_piece_at_coor(new_x, new_y)
         raise ArgumentError, 'That is an invalid move. Cannot capture your own piece.' if (occupying_piece.is_white && is_white?) || (!occupying_piece.is_white && !is_white?)
-        capture_piece(occupying_piece)
+        capture_piece!(occupying_piece)
       end
       update(x_position: new_x, y_position: new_y)
     end
@@ -54,36 +54,23 @@ class Piece < ApplicationRecord
     update(has_moved: true)
   end
 
-  # stubs to make Rspec work, this can possibly be updated if we refactor
-  def valid_move?(_new_x, _new_y)
-    true
-  end
-
-
-
-  # checks if piece can make the desired moved
-  def valid_move?(new_x, new_y)
-    if game.square_occupied?(new_x, new_y)
-      white? != game.find_piece(new_x, new_y).white?
-    elsif x < 0 || x > 7 || y < 0 || y > 7
-      false
-    else
-      true
-    end
-  end
-
   #Checking all obstruction
   def is_obstructed?(new_x, new_y)
-  return diagonal_obstruction?(new_x, new_y if is_diagonal?(new_x, new_y)
-  return vertical_obstruction?(new_x, new_y) if is_vertical?(new_x, new_y)
-  return horizontal_obstruction?(new_x, new_y) if is_horizontal?(new_x, new_y)
-  raise 'Invalid input. Not diagonal, horizontal or vertical.'
+    return false if type == KNIGHT
+    return true if off_board?(new_x, new_y)
+    #return diagonal_obstruction?(new_x, new_y if is_diagonal?(new_x, new_y)
+    #return vertical_obstruction?(new_x, new_y) if is_vertical?(new_x, new_y)
+    #return horizontal_obstruction?(new_x, new_y) if is_horizontal?(new_x, new_y)
+    #raise 'Invalid input. Not diagonal, horizontal or vertical.'
   end
 
-  # Checking vertical move and obstruction
-  def horizontal_move?(new_x, new_y)
-    y_position == new_y
+  #replaces vertical and horizontal moves
+  def straight_move?(new_x, new_y)
+    (new_x - x_position != 0 || new_y - y_position != 0) &&
+      (new_x == x_position || new_y == y_position || (new_x - x_position).abs == (new_y - y_position).abs)
   end
+
+  
 
   def horizontal_obstruction?(new_x, new_y)
     is_obstructed = false
@@ -96,10 +83,7 @@ class Piece < ApplicationRecord
     is_obstructed
   end
 
-  # Checking vertical move and obstruction
-  def vertical_move?(new_x, _new_y)
-    x_position == new_x
-  end
+  
 
   def vertical_obstruction?(new_x, new_y)
     is_obstructed = false
@@ -115,7 +99,7 @@ class Piece < ApplicationRecord
   # Checking diagonal move and obstruction
 
   def diagonal_move?(new_x, new_y)
-    new_y - x_position == new_y - y_position
+    return true if (new_x.to_i - x_position).abs == (new_y.to_i - y_position).abs
   end
 
   def diagonal_obstruction?(new_x, new_y)
@@ -128,15 +112,10 @@ class Piece < ApplicationRecord
       end
       y_pos += 1
     end
-<<<<<<< HEAD
+    is_obstructed
+  end
+end
 
-                        return true
-                      end
-                    end
-                  end
-                end
-              end
-=end 
       
 
 
@@ -145,9 +124,6 @@ class Piece < ApplicationRecord
   
 
 
-    is_obstructed
-  end
-end
 
 
 

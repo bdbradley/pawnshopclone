@@ -28,7 +28,7 @@
   <div class="col-10 center offset-1">
     <table id="chessboard">
       <tbody>
-        <% [8, 7, 6, 5, 4, 3, 2, 1].each do |row| %>
+        <% 8.downto(1).each do |row| %>
           <tr>
             <% (1..8).each do |col| %>
               <td
@@ -44,7 +44,7 @@
 
                  
                   <% piece = @game.get_piece_at_coor(col, row) %>
-                    <%= link_to piece_path(piece.id) do %>
+                    <%= link_to game_piece_path(current_game, piece.id) do %>
                       <%= image_tag piece_image, :id => "piece", :data => {
                           :id => piece.id,
                           :type => piece.type,
@@ -54,7 +54,6 @@
                           
                         }
                       %>
-
                     <% end %>
                   <% end %>
                 </td>
@@ -63,6 +62,8 @@
           <% end %>
         </tbody>
       </table>
+
+
 
     <br />
     <%= button_to "Go back to index of games", games_path, :method => :get, :class => "btn btn-success" %>        
