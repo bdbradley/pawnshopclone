@@ -1,10 +1,14 @@
 class Knight < Piece
 
     def valid_move?(new_x, new_y)
-      x_dif = (new_x.to_i - x_position).abs
-      y_dif = (new_y.to_i - y_position).abs
-      #knight moves one up and two over or two up and one over
-      (x_dif == 1 && y_dif == 2) || (x_dif == 2 && y_dif == 1)
+    	#needs refactoring, but normal is_obstructed method doesn't apply since knight "jumps" over pieces
+      return false if squared_occupied?(new_y, new_y)
+      return false if off_board?(new_x, new_y)
+      return true if 
+      	(x_position - new_x.to_i).abs == 1 && (y_position - new_y.to_i).abs == 2 ||
+      	(x_position - new_x.to_i).abs == 2 && (y_position - new_y.to_i).abs == 1  
+      end 
+      false 
     end
   
 end

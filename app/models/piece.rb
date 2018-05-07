@@ -54,6 +54,12 @@ class Piece < ApplicationRecord
 
   end
 
+  def is_obstructed?(new_x, new_y) 
+    return false if type == KNIGHT 
+    return true if off_board?(new_x, new_y)
+    return true if square_occupied?(new_x, new_y)
+
+
 	# stubs to make Rspec work, this can possibly be updated if we refactor
   def valid_move?(_new_x, _new_y)
     true
