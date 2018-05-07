@@ -7,7 +7,7 @@ class Queen < Piece
     	false
   	end
 
-end
+
 #Not sure which valid_move? to use?
 
 		 

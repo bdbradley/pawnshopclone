@@ -58,6 +58,7 @@ class Piece < ApplicationRecord
     return false if type == KNIGHT 
     return true if off_board?(new_x, new_y)
     return true if square_occupied?(new_x, new_y)
+  end 
 
 
 	# stubs to make Rspec work, this can possibly be updated if we refactor
@@ -79,6 +80,6 @@ class Piece < ApplicationRecord
 
   # end stubs
 
-  end 
-end
+ end  
+end 
 

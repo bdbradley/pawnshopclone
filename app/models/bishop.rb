@@ -6,7 +6,7 @@ class Bishop < Piece
     end
     false
   end
-end
+
   
 
 	  

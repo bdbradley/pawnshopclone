@@ -12,7 +12,7 @@ class King < Piece
   end 
   #still need to account for invalid move if King moves into check
 
-end
+
     
     	
     
