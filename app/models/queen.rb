@@ -12,5 +12,14 @@ class Queen < Piece
 	    horizontal_move?(new_x, new_y) ||  vertical_move?(new_x, new_y) ||  diagonal_move?(new_x, new_y)
 	  end 
 
+	  #Ryan version to add to mix 
+
+	  def valid_move?(new_x, new_y)
+    	unless is_obstructed?(new_x.to_i, new_y.to_i)
+      	return true if (new_x.to_i - x_position).abs == (new_y.to_i - y_position).abs || new_x.to_i == x_position || new_y.to_i == y_position
+    	end
+    	false
+  	end
+
 end
 #Not sure which valid_move? to use?

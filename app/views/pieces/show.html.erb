@@ -16,26 +16,26 @@
             <% (1..8).each do |col| %>
               <td
                 id=<%="#{col}#{row}"%>
-              <% if (col + row).odd? %>
-                class="white"
-              <% else %>
-                class="black"
-              <% end %>
-              >
+                <% if (col + row).odd? %>
+                  class="white"
+                <% else %>
+                  class="black"
+                <% end %>
+                >
                 <% piece_image = current_game.render_piece(col, row) %>
                 <% if piece_image.present? %>
 
                  
                   <% piece = current_game.get_piece_at_coor(col, row) %>
                     
-                      <%= image_tag piece_image, :id => "piece", :data => {
-                          :id => piece.id,
-                          :type => piece.type,
-                          :color => (piece.is_white ? "white" : "black"),
-                          :x => piece.x_position,
-                          :y => piece.y_position
-                        }
-                      %>
+                  <%= image_tag piece_image, :id => "piece", :data => {
+                      :id => piece.id,
+                      :type => piece.type,
+                      :color => (piece.is_white ? "white" : "black"),
+                      :x => piece.x_position,
+                      :y => piece.y_position
+                    }
+                  %>
                 <% end %>
               </td>
             <% end %>

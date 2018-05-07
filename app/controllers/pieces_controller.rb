@@ -7,8 +7,6 @@ class PiecesController < ApplicationController
   def create
     @piece = current_game.pieces.create(piece_params)
   end
-
-  
   
   def update
     @piece = Piece.find(params[:id])
@@ -32,6 +30,9 @@ class PiecesController < ApplicationController
   
 
 end 
+
+  
+  
     
     
 

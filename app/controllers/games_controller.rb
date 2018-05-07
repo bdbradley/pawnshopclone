@@ -5,7 +5,6 @@ class GamesController < ApplicationController
   def index
     @available_games = Game.available
     @ongoing_games = Game.ongoing
-    
   end
 
   def new
@@ -30,8 +29,6 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     white_player_name = @game.white_player.name
     black_player_name = @game.black_player.name 
-    
-
   end
 
   def update
@@ -42,7 +39,6 @@ class GamesController < ApplicationController
       @game.update(white_player_id: current_user.id)
     end
     redirect_to game_path(@game)
-    
   end 
 
   def forfeit
@@ -50,7 +46,6 @@ class GamesController < ApplicationController
     @game.update(player_lose: current_user.id, white_player_turn: nil)
     @game.destroy
     redirect_to games_path, :notice => "Game Has Been Forfeited!" 
-    
   end
 
   private 

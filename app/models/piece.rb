@@ -73,6 +73,6 @@ class Piece < ApplicationRecord
 
   # end stubs
 
-end 
-
+  end 
+end
 
