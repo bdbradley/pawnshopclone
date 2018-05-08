@@ -22,27 +22,37 @@
                   class="black"
                 <% end %>
                 >
-                <% piece_image = current_game.render_piece(col, row) %>
-                <% if piece_image.present? %>
+                  <% piece_image = current_game.render_piece(col, row) %>
+                  <% if piece_image.present? %>
 
+                    <% piece = current_game.get_piece_at_coor(col, row) %>
+                      
+                    <%= image_tag piece_image, :id => "piece", :data => {
+                        :id => piece.id,
+                        :type => piece.type,
+                        :color => (piece.is_white ? "white" : "black"),
+                        :x => piece.x_position,
+                        :y => piece.y_position
+                      }
+                    %>
                  
-                  <% piece = current_game.get_piece_at_coor(col, row) %>
-                    
-                  <%= image_tag piece_image, :id => "piece", :data => {
-                      :id => piece.id,
-                      :type => piece.type,
-                      :color => (piece.is_white ? "white" : "black"),
-                      :x => piece.x_position,
-                      :y => piece.y_position
-                    }
-                  %>
                 <% end %>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+              
+                    
+
+                
+
+                    
+
+
 
 
 

@@ -7,10 +7,10 @@ class PiecesController < ApplicationController
   def create
     @piece = current_game.pieces.create(piece_params)
   end
-  
+
   def update
     @piece = Piece.find(params[:id])
-    @piece.move_to!(params[:piece][:x_position], params[:piece][:y_position]) 
+    @piece.move_to!(:x_position, :y_position) 
     @game.update(white_player_turn: !@game.white_player_turn)
     redirect_to game_path(@game)
   end

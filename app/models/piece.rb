@@ -13,18 +13,19 @@ class Piece < ApplicationRecord
 
   def move_to!(new_x, new_y)
     transaction do 
-      unless real_move?(new_x, new_y)
-        raise ArgumentError, "#{type} has not moved."
+      unless valid_move?(new_x, new_y)
+        raise ArgumentError, "That is an invalid move for #{type}"
+      end
       if square_occupied?(new_x, new_y)
         occupying_piece = game.get_piece_at_coor(new_x, new_y)
         raise ArgumentError, 'That is an invalid move. Cannot capture your own piece.' if (occupying_piece.is_white && is_white?) || (!occupying_piece.is_white && !is_white?)
-        capture_piece!(occupying_piece)
+        capture_piece(occupying_piece)
       end
       update(x_position: new_x, y_position: new_y)
-    end
+    end 
   end 
       
-  
+        
   def square_occupied?(new_x, new_y)
     piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
     return false if piece.nil?
@@ -80,6 +81,8 @@ class Piece < ApplicationRecord
 
   # end stubs
 
- end  
+  
 end 
+      
+  
 

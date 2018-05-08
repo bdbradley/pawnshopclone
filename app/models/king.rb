@@ -7,9 +7,9 @@ class King < Piece
   		x_difference = (new_x.to_i - x_position).abs
     	y_difference = (new_y.to_i - y_position).abs
     	(x_difference <= 1) && (y_difference <= 1)
-  	end
+  end
   	false
-  end 
+end 
   #still need to account for invalid move if King moves into check
 
 
