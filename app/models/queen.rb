@@ -8,8 +8,6 @@ class Queen < Piece
 end
 
 
-#Not sure which valid_move? to use?
-
 		 
 
       
