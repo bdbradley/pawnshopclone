@@ -24,26 +24,10 @@ class Piece < ApplicationRecord
   end
 
 #Created a method to separate occupying piece same color
-  def same_color occupying_piece
-    (occupying_piece.is_white && is_white?) || (!occupying_piece.is_white && !is_white?)
+  def same_color? occupying_piece
+    occupying_piece.present? && occupying_piece.color == color
   end
 
-
-  def move_to!(new_x, new_y)
-    transaction do 
-      unless valid_move?(new_x, new_y)
-        raise ArgumentError, "That is an invalid move for #{type}"
-      end
-      if square_occupied?(new_x, new_y)
-        occupying_piece = game.get_piece_at_coor(new_x, new_y)
-        raise ArgumentError, 'That is an invalid move. Cannot capture your own piece.' if (occupying_piece.is_white && is_white?) || (!occupying_piece.is_white && !is_white?)
-        capture_piece(occupying_piece)
-      end
-      update(x_position: new_x, y_position: new_y)
-    end 
-  end 
-      
-        
   def square_occupied?(new_x, new_y)
     piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
     #.present asking boolean
