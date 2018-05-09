@@ -12,6 +12,7 @@ class PiecesController < ApplicationController
     @piece = Piece.find(params[:id])
     @piece.move_to!(params[:x_position], params[:y_position])
     redirect_to game_path(current_game[:id])
+    @current_game.update(white_player_turn: !@current_game.white_player_turn)
   end
 
   private 
@@ -25,10 +26,6 @@ class PiecesController < ApplicationController
   def current_game 
     @current_game ||= Game.find(params[:game_id])
   end 
-
-  
-
-  
 
 end 
 

@@ -71,3 +71,5 @@ class Pawn < Piece
     end
     
 end
+
+PAWN = 'Pawn'.freeze

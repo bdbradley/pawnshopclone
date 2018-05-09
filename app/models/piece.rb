@@ -30,6 +30,13 @@ class Piece < ApplicationRecord
     end
   end
 
+  def is_obstructed?(new_x, new_y)
+    return false if type == KNIGHT
+    return true if off_board?(new_x, new_y)
+    return true if straight_obstruction?(new_x, new_y)
+    false
+  end 
+
   def square_occupied?(new_x, new_y)
     piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
     return false if piece.nil?

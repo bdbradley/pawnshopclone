@@ -11,7 +11,7 @@ class Game < ApplicationRecord
 
   def populate_board!
     
-    (1..8).each do |i|
+    1.upto(8).each do |i|
       Pawn.create(game_id: id, is_white: true, x_position: i, y_position: 2)
     end
 
@@ -28,7 +28,7 @@ class Game < ApplicationRecord
     Queen.create(game_id: id, is_white: true, x_position: 5, y_position: 1)
 
     #Black Player#
-    (1..8).each do |i|
+    1.upto(8).each do |i|
       Pawn.create(game_id: id, is_white: false, x_position: i, y_position: 7)
     end
 
@@ -70,9 +70,8 @@ class Game < ApplicationRecord
     false
   end
     
-
   def check?(is_white)
-    piece_under_attack?(is_white, your_king(is_white).x_position, your_king(is_white).y_position)
+    under_attack?(is_white, your_king(is_white).x_position, your_king(is_white).y_position)
   end
 
   def forfeit(current_user)
@@ -83,4 +82,11 @@ class Game < ApplicationRecord
     end
   end
 
+  IN_PLAY = 0
+  FORFEIT = 1
+  CHECKMATE = 2
+  STALEMATE = 3
+  AGREED_DRAW = 4
+
 end
+
