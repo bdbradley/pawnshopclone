@@ -15,7 +15,8 @@ class GamesController < ApplicationController
     @game = Game.create(game_params)
     @game.update_attributes(:white_player => current_user)
     @game.populate_board!
-    redirect_to games_path
+    redirect_to games_path  
+    
   end
 
   def destroy
@@ -29,6 +30,11 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     white_player_name = @game.white_player.name
     black_player_name = @game.black_player.name 
+    white_player_turn = @game.white_player_turn
+    game_state = @game.state
+    white_king_check = @game.check?(true)
+    black_king_check = @game.check?(false)
+    
   end
 
   def update
@@ -43,8 +49,7 @@ class GamesController < ApplicationController
 
   def forfeit
     @game = Game.find(params[:id])
-    @game.update(player_lose: current_user.id, white_player_turn: nil)
-    @game.destroy
+    @game.update(state: Game::FORFEIT, player_lose: current_user.id, white_player_turn: nil)
     redirect_to games_path, :notice => "Game Has Been Forfeited!" 
   end
 
