@@ -9,6 +9,8 @@ class Knight < Piece
 	  	(x_position - new_x.to_i).abs == 2 && (y_position - new_y.to_i).abs == 1  
 	end 
 	  false 
+
+	def is_obstructed?(new_x, new_y); end 
 end
 
 KNIGHT = 'Knight'.freeze

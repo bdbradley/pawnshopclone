@@ -13,6 +13,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
+    @game.update_attributes(:white_player => current_user)
     @game.populate_board!
     redirect_to games_path  
     
@@ -33,6 +34,7 @@ class GamesController < ApplicationController
     game_state = @game.state
     white_king_check = @game.check?(true)
     black_king_check = @game.check?(false)
+    
   end
 
   def update

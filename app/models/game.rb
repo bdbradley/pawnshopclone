@@ -2,10 +2,11 @@ class Game < ApplicationRecord
   belongs_to :white_player, class_name: 'User'
   belongs_to :black_player, class_name: 'User', optional: true
 
-  has_many :pieces
+  has_many :pieces, dependent: :destroy
 
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
   scope :ongoing, -> { where.not('white_player_id IS NULL OR black_player_id IS NULL') }
+  
 
   validates :name, :presence => true
 
@@ -54,7 +55,7 @@ class Game < ApplicationRecord
     pieces.find_by(x_position: x_pos, y_position: y_pos)
   end
 
-  def enemy_king(is_white)
+  def opponent_king(is_white)
     pieces.find_by(type: KING, is_white: !is_white)
   end
 
@@ -82,7 +83,8 @@ class Game < ApplicationRecord
     end
   end
 
-  IN_PLAY = 0
+  #logic relating to state 
+  IN_PROGRESS = 0
   FORFEIT = 1
   CHECKMATE = 2
   STALEMATE = 3
