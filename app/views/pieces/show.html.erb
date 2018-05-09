@@ -22,8 +22,12 @@
                   class="black"
                 <% end %>
                 >
+                <%= link_to game_piece_path(current_game, @piece, params: {x_position: row, y_position: col}), class: "move_to", method: :put do %>
+                
                   <% piece_image = current_game.render_piece(col, row) %>
                   <% if piece_image.present? %>
+
+
 
                     <% piece = current_game.get_piece_at_coor(col, row) %>
                       
@@ -35,14 +39,17 @@
                         :y => piece.y_position
                       }
                     %>
+
                  
                 <% end %>
               </td>
             <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+            
               
 
 
