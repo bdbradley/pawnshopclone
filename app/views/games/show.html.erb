@@ -5,7 +5,7 @@
 
 <h1 class="text-center">The Pawnshop</h1>
 
-  
+  <div id="gameinfo">
     <div id="currentUser" data-current-user-id=<%= current_user.id %>>
       <p>You are logged in as <%= current_user.name %></p>
     </div>
@@ -15,22 +15,15 @@
     <div id="blackPlayer" data-user-black-id=<%= @game.black_player_id %>>
       <p><%= @game.black_player.name %> is playing as black.</p>
     </div>
-      
-
-
-      
-      
-      
 
     
-  
-
+    
   <div class="col-10 center offset-1">
     <table id="chessboard">
       <tbody>
-        <% [8, 7, 6, 5, 4, 3, 2, 1].each do |row| %>
+        <% 8.downto(1).each do |row| %>
           <tr>
-            <% (1..8).each do |col| %>
+            <% 1.upto(8).each do |col| %>
               <td
                 id=<%="#{col}#{row}"%>
               <% if (col + row).odd? %>
@@ -44,7 +37,7 @@
 
                  
                   <% piece = @game.get_piece_at_coor(col, row) %>
-                    <%= link_to piece_path(piece.id) do %>
+                    <%= link_to game_piece_path(current_game, piece.id) do %>
                       <%= image_tag piece_image, :id => "piece", :data => {
                           :id => piece.id,
                           :type => piece.type,
@@ -54,7 +47,6 @@
                           
                         }
                       %>
-
                     <% end %>
                   <% end %>
                 </td>
@@ -64,6 +56,8 @@
         </tbody>
       </table>
 
+
+
     <br />
     <%= button_to "Go back to index of games", games_path, :method => :get, :class => "btn btn-success" %>        
     <br />
@@ -71,16 +65,13 @@
     <% if current_user == @game.white_player || current_user == @game.black_player %>
       <%= link_to "Forfeit Game", forfeit_game_path(@game), :class => "btn btn-danger", :method => :patch,  data: {confirm: "Are you sure? Forfeited games cannot be recovered."} %>
     <% end %> 
+      
+
+
+      
+      
+      
+
     
-        
-    
+  
 
-
- 
-
-    
-     
-
-                  
-
-                      

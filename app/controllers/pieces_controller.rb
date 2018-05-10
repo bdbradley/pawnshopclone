@@ -1,24 +1,41 @@
 class PiecesController < ApplicationController
 
-
   def show
     @piece = Piece.find(params[:id])
-    @game = @piece.game
   end
-  # Comment belongs to User.  User has many comments.
-  # comment.find_by(user)
+
+  def create
+    @piece = current_game.pieces.create(piece_params)
+  end
 
   def update
     @piece = Piece.find(params[:id])
-    @game = @piece.game
-    @piece.move_to!(x_position: params[:new_x], y_position: params[:new_y])
-    @game.update(white_player_turn: !@game.white_player_turn)
-    redirect_to game_path(@game)
+    @piece.move_to!(params[:x_position], params[:y_position])
+    redirect_to game_path(current_game[:id])
+    @current_game.update(white_player_turn: !@current_game.white_player_turn)
   end
 
-  private
+  private 
 
-  def piece_params
-    params.require(:piece).permit(:x_position, :y_position)
-  end
-end
+  def piece_params 
+    params.permit(:x_position, :y_position, :type)
+  end 
+
+  helper_method :current_game
+
+  def current_game 
+    @current_game ||= Game.find(params[:game_id])
+  end 
+
+end 
+
+  
+  
+    
+    
+
+
+
+
+
+

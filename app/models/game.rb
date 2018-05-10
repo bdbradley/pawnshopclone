@@ -2,21 +2,17 @@ class Game < ApplicationRecord
   belongs_to :white_player, class_name: 'User'
   belongs_to :black_player, class_name: 'User', optional: true
 
-  has_many :pieces
+  has_many :pieces, dependent: :destroy
 
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
   scope :ongoing, -> { where.not('white_player_id IS NULL OR black_player_id IS NULL') }
+  
 
   validates :name, :presence => true
 
-  
-  
-  
-  
-
   def populate_board!
     
-    (1..8).each do |i|
+    1.upto(8).each do |i|
       Pawn.create(game_id: id, is_white: true, x_position: i, y_position: 2)
     end
 
@@ -33,7 +29,7 @@ class Game < ApplicationRecord
     Queen.create(game_id: id, is_white: true, x_position: 5, y_position: 1)
 
     #Black Player#
-    (1..8).each do |i|
+    1.upto(8).each do |i|
       Pawn.create(game_id: id, is_white: false, x_position: i, y_position: 7)
     end
 
@@ -59,4 +55,40 @@ class Game < ApplicationRecord
     pieces.find_by(x_position: x_pos, y_position: y_pos)
   end
 
+  def opponent_king(is_white)
+    pieces.find_by(type: KING, is_white: !is_white)
+  end
+
+  def your_king(is_white)
+    pieces.find_by(type: KING, is_white: is_white)
+  end
+
+  def under_attack?(is_white, x_pos, y_pos)
+    pieces.where.not(is_white: is_white, x_position: nil).find_each do |piece|
+      return true if piece.valid_move?(x_pos, y_pos)
+      return true if piece.type == PAWN && piece.can_attack_square?(x_pos, y_pos)
+    end
+    false
+  end
+    
+  def check?(is_white)
+    under_attack?(is_white, your_king(is_white).x_position, your_king(is_white).y_position)
+  end
+
+  def forfeit(current_user)
+    if current_user.id == white_player_id
+      update!(player_win: black_player_id, player_lose: white_player_id)
+    elsif current_user.id == black_player_id
+      update!(player_win: white_player_id, player_lose: black_player_id)
+    end
+  end
+
+  #logic relating to state 
+  IN_PROGRESS = 0
+  FORFEIT = 1
+  CHECKMATE = 2
+  STALEMATE = 3
+  AGREED_DRAW = 4
+
 end
+
