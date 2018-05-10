@@ -56,5 +56,126 @@ class Piece < ApplicationRecord
     update(has_moved: true)
   end
 
+  def is_vertically_obstructed?(new_x, new_y)
+    x1 = self.x_position
+    y1 = self.y_position
+    if (y1 < new_y)
+      small_y = y1
+      big_y = new_y
+    else
+      small_y = new_y
+      big_y = y1
+    end
+    i = small_y + 1
+
+    while i < big_y  do
+      if ($board[x1][i] === nil)
+        i +=1
+      else
+        return false
+      end
+    end
+    return true
+  end
+
+  def is_horizontally_obstructed?(new_x, new_y)
+    x1 = self.x_position
+    y1 = self.y_position
+    if (x1 < new_x)
+      small_x = x1
+      big_x = new_x
+    else
+      small_x = new_x
+      big_x = x1
+    end
+
+    i = small_x + 1
+
+    while i < big_x do
+      if ($board[i][y1] === nil)
+        i +=1
+      else
+        return false
+      end
+    end
+    return true
+  end
+
+  def is_diagonally_obstructed(new_x, new_y)
+    x1 = self.x_position
+    y1 = self.y_position
+    if (x1 - new_x).abs != (y1 - new_y).abs
+      raise "Invalid move"
+    end
+    
+    if ((x1 < new_x) && (y1 < new_y)) 
+      x = x1 + 1
+      y = y1 + 1
+      while x < new_x do
+        if ($board[x][y] === nil)
+          x += 1
+          y += 1
+        else
+          return false
+        end
+      end
+      return true
+    end
+
+    if ((x1 < new_x) && (y1 > new_y)) 
+      x = x1 + 1
+      y = y1 - 1
+      while x < new_x do
+        if ($board[x][y] === nil)
+          x += 1
+          y -= 1
+        else
+          return false
+        end
+      end
+      return true
+    end
+
+    if ((x1 > new_x) && (y1 < new_y)) 
+      x = x1 - 1
+      y = y1 + 1
+      while x > new_x do
+        if ($board[x][y] === nil)
+          x -= 1
+          y += 1
+        else
+          return false
+        end
+      end
+      return true
+    end
+
+    if ((x1 > new_x) && (y1 > new_y)) 
+      x = x1 - 1
+      y = y1 - 1
+      while x > new_x do
+        if ($board[x][y] === nil)
+          x -= 1
+          y -= 1
+        else
+          return false
+        end
+      end
+      return true
+    end
+  end
+
+  def is_obstructed?(new_x, new_y)
+    x1 = self.x_position
+    y1 = self.y_position
+    if x1 === new_x
+      is_vertically_obstructed?(new_x, new_y)
+    elsif y1 === new_y
+      is_horizontally_obstructed?(new_x, new_y)
+    else
+      is_diagonally_obstructed(new_x, new_y)
+    end
+  end
+
 
 end
