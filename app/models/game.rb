@@ -71,8 +71,10 @@ class Game < ApplicationRecord
     false
   end
 
-def check?(is_white)
-  under_attack?(is_white, your_king(is_white).x_position, your_king(is_white).y_position)
+
+  def check?(is_white)
+    your_piece = your_king(is_white)
+    under_attack?(is_white, your_piece.x_position, your_piece.y_position)
   end
 
 
