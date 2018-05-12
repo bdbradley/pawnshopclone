@@ -71,10 +71,12 @@ class Game < ApplicationRecord
     false
   end
 
+
   def check?(is_white)
     your_piece = your_king(is_white)
     under_attack?(is_white, your_piece.x_position, your_piece.y_position)
   end
+
 
   def forfeit(current_user)
     if current_user.id == white_player_id
