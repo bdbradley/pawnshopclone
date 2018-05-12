@@ -56,6 +56,10 @@ class Piece < ApplicationRecord
     update(has_moved: true)
   end
 
+  def get_piece_at_coor(x_pos, y_pos)
+    game.get_piece_at_coor(x_pos, y_pos)
+  end
+
   def is_vertically_obstructed?(new_x, new_y)
     x1 = self.x_position
     y1 = self.y_position
@@ -69,7 +73,7 @@ class Piece < ApplicationRecord
     i = small_y + 1
 
     while i < big_y  do
-      if ($board[x1][i] === nil)
+      if get_piece_at_coor(x1, i) === nil
         i +=1
       else
         return false
@@ -92,7 +96,7 @@ class Piece < ApplicationRecord
     i = small_x + 1
 
     while i < big_x do
-      if ($board[i][y1] === nil)
+      if get_piece_at_coor(i, y1) === nil
         i +=1
       else
         return false
@@ -112,7 +116,7 @@ class Piece < ApplicationRecord
       x = x1 + 1
       y = y1 + 1
       while x < new_x do
-        if ($board[x][y] === nil)
+        if get_piece_at_coor(x, y) === nil
           x += 1
           y += 1
         else
@@ -126,7 +130,7 @@ class Piece < ApplicationRecord
       x = x1 + 1
       y = y1 - 1
       while x < new_x do
-        if ($board[x][y] === nil)
+        if get_piece_at_coor(x, y) === nil
           x += 1
           y -= 1
         else
@@ -140,7 +144,7 @@ class Piece < ApplicationRecord
       x = x1 - 1
       y = y1 + 1
       while x > new_x do
-        if ($board[x][y] === nil)
+        if get_piece_at_coor(x, y) === nil
           x -= 1
           y += 1
         else
@@ -154,7 +158,7 @@ class Piece < ApplicationRecord
       x = x1 - 1
       y = y1 - 1
       while x > new_x do
-        if ($board[x][y] === nil)
+        if get_piece_at_coor(x, y) === nil
           x -= 1
           y -= 1
         else
