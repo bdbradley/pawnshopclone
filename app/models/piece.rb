@@ -105,14 +105,14 @@ class Piece < ApplicationRecord
     return true
   end
 
-  def is_diagonally_obstructed(new_x, new_y)
+  def is_diagonally_obstructed?(new_x, new_y)
     x1 = self.x_position
     y1 = self.y_position
     if (x1 - new_x).abs != (y1 - new_y).abs
       raise "Invalid move"
     end
-    
-    if ((x1 < new_x) && (y1 < new_y)) 
+
+    if ((x1 < new_x) && (y1 < new_y))
       x = x1 + 1
       y = y1 + 1
       while x < new_x do
@@ -126,7 +126,7 @@ class Piece < ApplicationRecord
       return true
     end
 
-    if ((x1 < new_x) && (y1 > new_y)) 
+    if ((x1 < new_x) && (y1 > new_y))
       x = x1 + 1
       y = y1 - 1
       while x < new_x do
@@ -140,7 +140,7 @@ class Piece < ApplicationRecord
       return true
     end
 
-    if ((x1 > new_x) && (y1 < new_y)) 
+    if ((x1 > new_x) && (y1 < new_y))
       x = x1 - 1
       y = y1 + 1
       while x > new_x do
@@ -154,7 +154,7 @@ class Piece < ApplicationRecord
       return true
     end
 
-    if ((x1 > new_x) && (y1 > new_y)) 
+    if ((x1 > new_x) && (y1 > new_y))
       x = x1 - 1
       y = y1 - 1
       while x > new_x do
@@ -177,7 +177,7 @@ class Piece < ApplicationRecord
     elsif y1 === new_y
       is_horizontally_obstructed?(new_x, new_y)
     else
-      is_diagonally_obstructed(new_x, new_y)
+      is_diagonally_obstructed?(new_x, new_y)
     end
   end
 

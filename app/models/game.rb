@@ -6,12 +6,12 @@ class Game < ApplicationRecord
 
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
   scope :ongoing, -> { where.not('white_player_id IS NULL OR black_player_id IS NULL') }
-  
+
 
   validates :name, :presence => true
 
   def populate_board!
-    
+
     1.upto(8).each do |i|
       Pawn.create(game_id: id, is_white: true, x_position: i, y_position: 2)
     end
@@ -70,9 +70,10 @@ class Game < ApplicationRecord
     end
     false
   end
-    
+
   def check?(is_white)
-    under_attack?(is_white, your_king(is_white).x_position, your_king(is_white).y_position)
+    your_piece = your_king(is_white)
+    under_attack?(is_white, your_piece.x_position, your_piece.y_position)
   end
 
   def forfeit(current_user)
@@ -83,7 +84,7 @@ class Game < ApplicationRecord
     end
   end
 
-  #logic relating to state 
+  #logic relating to state
   IN_PROGRESS = 0
   FORFEIT = 1
   CHECKMATE = 2
@@ -91,4 +92,3 @@ class Game < ApplicationRecord
   AGREED_DRAW = 4
 
 end
-

@@ -14,22 +14,23 @@ class Pawn < Piece
       end
       false
     end
-      
+
 
     def can_attack_square?(new_x, new_y)
       x_difference = (new_x.to_i - x_position.to_i).abs
       y_difference = (new_y.to_i - y_position.to_i).abs
-        return true if x_difference == 1 && y_difference == 1
+
+      return true if x_difference == 1 && y_difference == 1
       false
     end
 
-    private 
+    private
 
     def still_in_starting_square?(new_x, new_y)
     x_position == new_x && y_position == new_y
     end
-      
-  
+
+
     def pawn_capture?(new_x, new_y)
       x_difference = (new_x.to_i - x_position.to_i).abs
       y_difference = (new_y.to_i - y_position.to_i).abs
@@ -61,7 +62,7 @@ class Pawn < Piece
     def move_two_squares_ok?(new_x, new_y)
       x_difference = (new_x.to_i - x_position.to_i).abs
       y_difference = (new_y.to_i - y_position.to_i).abs
-      if piece_moved?  
+      if piece_moved?
         x_difference.zero? && y_difference == 1
         #only allowed to move one space if pawn has already moved
       else
@@ -69,7 +70,7 @@ class Pawn < Piece
         #allowed to move 1 or 2 spaces if pawn has not moved yet
       end
     end
-    
+
 end
 
 PAWN = 'Pawn'.freeze
