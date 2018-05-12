@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
-  
+
 
   def index
     @available_games = Game.available
@@ -15,26 +15,27 @@ class GamesController < ApplicationController
     @game = Game.create(game_params)
     @game.update_attributes(:white_player => current_user)
     @game.populate_board!
-    redirect_to games_path  
-    
+    redirect_to games_path
+
   end
 
   def destroy
     @game = Game.find(params[:id])
     @game.destroy
     redirect_to games_path
-    
+
   end
 
   def show
     @game = Game.find(params[:id])
     white_player_name = @game.white_player.name
-    black_player_name = @game.black_player.name 
+    black_player_name = @game.black_player.name
     white_player_turn = @game.white_player_turn
     game_state = @game.state
-    white_king_check = @game.check?(true)
-    black_king_check = @game.check?(false)
-    
+  white_king_check = @game.check?(true)
+black_king_check = @game.check?(false)
+
+
   end
 
   def update
@@ -45,15 +46,15 @@ class GamesController < ApplicationController
       @game.update(white_player_id: current_user.id)
     end
     redirect_to game_path(@game)
-  end 
+  end
 
   def forfeit
     @game = Game.find(params[:id])
     @game.update(state: Game::FORFEIT, player_lose: current_user.id, white_player_turn: nil)
-    redirect_to games_path, :notice => "Game Has Been Forfeited!" 
+    redirect_to games_path, :notice => "Game Has Been Forfeited!"
   end
 
-  private 
+  private
 
   def game_params
       params.require(:game).permit(:name, :white_player, :black_player)
@@ -61,8 +62,8 @@ class GamesController < ApplicationController
 
   helper_method :current_game
 
-  def current_game 
+  def current_game
     @current_game ||= Game.find(params[:id])
-  end 
+  end
 
 end

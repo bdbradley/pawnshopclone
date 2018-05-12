@@ -56,8 +56,7 @@ class Piece < ApplicationRecord
     game.get_piece_at_coor(x_pos, y_pos)
   end
 
-
-  #CHECKMATE method
+  # CHECKMATE method
   # determine if a state of checkmate has occurred
   def checkmate?(color)
     checked_king = pieces.find_by(type: 'King', color: color)
@@ -81,7 +80,6 @@ class Piece < ApplicationRecord
   def check?(color)
     king = pieces.find_by(type: 'King', color: color)
     opponents = pieces_remaining(!color)
-
     opponents.each do |piece|
       if piece.valid_move?(king.x_position, king.y_position)
         @piece_causing_check = piece
@@ -102,7 +100,6 @@ class Piece < ApplicationRecord
     false
   end
 
-
   # method to determine if an opposing piece can block check
   # this method is called to determine checkmate.
   def can_be_blocked?(king)
@@ -121,8 +118,7 @@ class Piece < ApplicationRecord
     false
   end
 
-  #END CHECKMATE method
-
+  # END CHECKMATE method
 
   def is_vertically_obstructed?(_new_x, new_y)
     x1 = x_position
