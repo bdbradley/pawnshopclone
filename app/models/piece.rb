@@ -1,21 +1,18 @@
 class Piece < ApplicationRecord
-
-
   belongs_to :game
 
-	def color
+  def color
     return 'white' if is_white == true
     'black'
   end
 
   def render
-  	"#{color}-#{type.downcase}.png"
-	end
+    "#{color}-#{type.downcase}.png"
+  end
 
-#Updated move_to in a cleaner way. But same idea that you created.
+  # Updated move_to in a cleaner way. But same idea that you created.
   def move_to!(new_x, new_y)
     transaction do
-
       raise ArgumentError, "#{type} has not moved." unless real_move?(new_x, new_y)
       occupying_piece = game.get_piece_at_coor(new_x, new_y)
       raise ArgumentError, 'That is an invalid move. Cannot capture your own piece.' if same_color?(occupying_piece)
@@ -24,8 +21,7 @@ class Piece < ApplicationRecord
     end
   end
 
-
-  def same_color? occupying_piece
+  def same_color?(occupying_piece)
     occupying_piece.present? && occupying_piece.color == color
   end
 
@@ -36,7 +32,7 @@ class Piece < ApplicationRecord
   end
 
   def off_board?(new_x, new_y)
-      new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
+    new_x < 1 || new_x > 8 || new_y < 1 || new_y > 8
   end
 
   def capture_piece!(captured_piece)
@@ -60,10 +56,78 @@ class Piece < ApplicationRecord
     game.get_piece_at_coor(x_pos, y_pos)
   end
 
-  def is_vertically_obstructed?(new_x, new_y)
-    x1 = self.x_position
-    y1 = self.y_position
-    if (y1 < new_y)
+
+  #CHECKMATE method
+  # determine if a state of checkmate has occurred
+  def checkmate?(color)
+    checked_king = pieces.find_by(type: 'King', color: color)
+
+    # make sure color is in check and get @piece_causing_check
+    return false unless check?(color)
+
+    # see if another piece can capture checking piece
+    return false if @piece_causing_check.can_be_captured?
+
+    # see if king can get himself out of check
+    return false if checked_king.can_move_out_of_check?
+
+    # # see if another piece can block check
+    return false if @piece_causing_check.can_be_blocked?(checked_king)
+
+    true
+  end
+
+  # determines if color is in check
+  def check?(color)
+    king = pieces.find_by(type: 'King', color: color)
+    opponents = pieces_remaining(!color)
+
+    opponents.each do |piece|
+      if piece.valid_move?(king.x_position, king.y_position)
+        @piece_causing_check = piece
+        return true
+      end
+    end
+    false
+  end
+
+  # method to determine if a piece can be captured.
+  # called to determine checkmate
+  def can_be_captured?
+    opponents = game.pieces_remaining(!color)
+    opponents.each do |opponent|
+      # for each opponent, see if the checking piece can be captured
+      return true if opponent.valid_move?(x_position, y_position)
+    end
+    false
+  end
+
+
+  # method to determine if an opposing piece can block check
+  # this method is called to determine checkmate.
+  def can_be_blocked?(king)
+    # get all possible squares that could be used to obstruct check
+    obstruction_array = obstructed_squares(king.x_position, king.y_position)
+
+    opponents = game.pieces_remaining(!color)
+    # for each opponent, iterate through all squares that could obstruct
+    opponents.each do |opponent|
+      next if opponent.type == 'King'
+      obstruction_array.each do |square|
+        # return true if we find even one way to obstruct check
+        return true if opponent.valid_move?(square[0], square[1])
+      end
+    end
+    false
+  end
+
+  #END CHECKMATE method
+
+
+  def is_vertically_obstructed?(_new_x, new_y)
+    x1 = x_position
+    y1 = y_position
+    if y1 < new_y
       small_y = y1
       big_y = new_y
     else
@@ -72,20 +136,20 @@ class Piece < ApplicationRecord
     end
     i = small_y + 1
 
-    while i < big_y  do
-      if get_piece_at_coor(x1, i) === nil
-        i +=1
+    while i < big_y
+      if get_piece_at_coor(x1, i).nil?
+        i += 1
       else
         return false
       end
     end
-    return true
+    true
   end
 
-  def is_horizontally_obstructed?(new_x, new_y)
-    x1 = self.x_position
-    y1 = self.y_position
-    if (x1 < new_x)
+  def is_horizontally_obstructed?(new_x, _new_y)
+    x1 = x_position
+    y1 = y_position
+    if x1 < new_x
       small_x = x1
       big_x = new_x
     else
@@ -95,28 +159,26 @@ class Piece < ApplicationRecord
 
     i = small_x + 1
 
-    while i < big_x do
-      if get_piece_at_coor(i, y1) === nil
-        i +=1
+    while i < big_x
+      if get_piece_at_coor(i, y1).nil?
+        i += 1
       else
         return false
       end
     end
-    return true
+    true
   end
 
   def is_diagonally_obstructed(new_x, new_y)
-    x1 = self.x_position
-    y1 = self.y_position
-    if (x1 - new_x).abs != (y1 - new_y).abs
-      raise "Invalid move"
-    end
+    x1 = x_position
+    y1 = y_position
+    raise 'Invalid move' if (x1 - new_x).abs != (y1 - new_y).abs
 
-    if ((x1 < new_x) && (y1 < new_y))
+    if (x1 < new_x) && (y1 < new_y)
       x = x1 + 1
       y = y1 + 1
-      while x < new_x do
-        if get_piece_at_coor(x, y) === nil
+      while x < new_x
+        if get_piece_at_coor(x, y).nil?
           x += 1
           y += 1
         else
@@ -126,11 +188,11 @@ class Piece < ApplicationRecord
       return true
     end
 
-    if ((x1 < new_x) && (y1 > new_y))
+    if (x1 < new_x) && (y1 > new_y)
       x = x1 + 1
       y = y1 - 1
-      while x < new_x do
-        if get_piece_at_coor(x, y) === nil
+      while x < new_x
+        if get_piece_at_coor(x, y).nil?
           x += 1
           y -= 1
         else
@@ -140,11 +202,11 @@ class Piece < ApplicationRecord
       return true
     end
 
-    if ((x1 > new_x) && (y1 < new_y))
+    if (x1 > new_x) && (y1 < new_y)
       x = x1 - 1
       y = y1 + 1
-      while x > new_x do
-        if get_piece_at_coor(x, y) === nil
+      while x > new_x
+        if get_piece_at_coor(x, y).nil?
           x -= 1
           y += 1
         else
@@ -154,11 +216,11 @@ class Piece < ApplicationRecord
       return true
     end
 
-    if ((x1 > new_x) && (y1 > new_y))
+    if (x1 > new_x) && (y1 > new_y)
       x = x1 - 1
       y = y1 - 1
-      while x > new_x do
-        if get_piece_at_coor(x, y) === nil
+      while x > new_x
+        if get_piece_at_coor(x, y).nil?
           x -= 1
           y -= 1
         else
@@ -170,8 +232,8 @@ class Piece < ApplicationRecord
   end
 
   def is_obstructed?(new_x, new_y)
-    x1 = self.x_position
-    y1 = self.y_position
+    x1 = x_position
+    y1 = y_position
     if x1 === new_x
       is_vertically_obstructed?(new_x, new_y)
     elsif y1 === new_y
@@ -180,6 +242,4 @@ class Piece < ApplicationRecord
       is_diagonally_obstructed(new_x, new_y)
     end
   end
-
-
 end
