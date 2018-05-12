@@ -111,8 +111,8 @@ class Piece < ApplicationRecord
     if (x1 - new_x).abs != (y1 - new_y).abs
       raise "Invalid move"
     end
-    
-    if ((x1 < new_x) && (y1 < new_y)) 
+
+    if ((x1 < new_x) && (y1 < new_y))
       x = x1 + 1
       y = y1 + 1
       while x < new_x do
@@ -126,7 +126,7 @@ class Piece < ApplicationRecord
       return true
     end
 
-    if ((x1 < new_x) && (y1 > new_y)) 
+    if ((x1 < new_x) && (y1 > new_y))
       x = x1 + 1
       y = y1 - 1
       while x < new_x do
@@ -140,7 +140,7 @@ class Piece < ApplicationRecord
       return true
     end
 
-    if ((x1 > new_x) && (y1 < new_y)) 
+    if ((x1 > new_x) && (y1 < new_y))
       x = x1 - 1
       y = y1 + 1
       while x > new_x do
@@ -154,7 +154,7 @@ class Piece < ApplicationRecord
       return true
     end
 
-    if ((x1 > new_x) && (y1 > new_y)) 
+    if ((x1 > new_x) && (y1 > new_y))
       x = x1 - 1
       y = y1 - 1
       while x > new_x do
