@@ -1,9 +1,5 @@
 class Knight < Piece
 
-	def obstructed_squares(new_x, new_y)
-	# knight jumps over pieces - can't be obstructed - return empty
-		[]
-	end
 
 	def valid_move?(new_x, new_y)
 		#needs refactoring, but normal is_obstructed method doesn't apply since knight "jumps" over pieces

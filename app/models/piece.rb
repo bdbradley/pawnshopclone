@@ -70,9 +70,6 @@ class Piece < ApplicationRecord
     # see if king can get himself out of check
     return false if checked_king.can_move_out_of_check?
 
-    # # see if another piece can block check
-    return false if @piece_causing_check.can_be_blocked?(checked_king)
-
     true
   end
 
@@ -100,23 +97,6 @@ class Piece < ApplicationRecord
     false
   end
 
-  # method to determine if an opposing piece can block check
-  # this method is called to determine checkmate.
-  def can_be_blocked?(king)
-    # get all possible squares that could be used to obstruct check
-    obstruction_array = obstructed_squares(king.x_position, king.y_position)
-
-    opponents = game.pieces_remaining(!color)
-    # for each opponent, iterate through all squares that could obstruct
-    opponents.each do |opponent|
-      next if opponent.type == 'King'
-      obstruction_array.each do |square|
-        # return true if we find even one way to obstruct check
-        return true if opponent.valid_move?(square[0], square[1])
-      end
-    end
-    false
-  end
 
   # END CHECKMATE method
 
