@@ -47,6 +47,7 @@ class Game < ApplicationRecord
   # Checkmate Starts
 
   # The player whose turn it is to move is not in check but has no legal move
+
   def stalemate?(color)
     your_pieces = my_pieces(color)
     available_moves = []
