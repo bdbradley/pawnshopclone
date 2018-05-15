@@ -85,13 +85,13 @@ class Game < ApplicationRecord
 
   def capture_opponent_causing_check?(color)
     friendlies = my_pieces(color)
-    the_liberator = []
+    not_capture = []
     friendlies.each do |friend|
       @enemies_in_check.each do |enemy|
-        the_liberator << friend if friend.valid_move?(enemy.x_position, enemy.y_position) == true
+        not_capture << friend if friend.valid_move?(enemy.x_position, enemy.y_position) == true
       end
     end
-    return true if the_liberator.any?
+    return true if not_capture.any?
     false
   end
 
