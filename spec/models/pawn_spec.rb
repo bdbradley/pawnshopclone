@@ -7,9 +7,8 @@ RSpec.describe Pawn, type: :model do
     it 'is successful to up/right' do
       expect(pawn.valid_move?(2, 3)).to eq true
     end
-
+  end
     it 'is successful to down/left' do
       expect(pawn.valid_move?(4, 4)).to eq true
     end
   end
-end
