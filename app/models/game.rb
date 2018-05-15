@@ -48,22 +48,6 @@ class Game < ApplicationRecord
 
   # The player whose turn it is to move is not in check but has no legal move
 
-  def stalemate?(color)
-    your_pieces = my_pieces(color)
-    available_moves = []
-    your_pieces.each do |piece|
-      1.upto(8) do |x|
-        1.upto(8) do |y|
-          if piece.valid_move?(x, y) && !piece.move_causes_check?(x, y)
-            available_moves << [x, y]
-          end
-        end
-      end
-    end
-    return false if available_moves.any?
-    true
-  end
-
   def checkmate?(color)
     return false unless in_check?(color)
     # return false if capture_opponent_causing_check?(color)
