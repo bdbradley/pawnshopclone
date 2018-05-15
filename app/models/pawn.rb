@@ -58,9 +58,5 @@ class Pawn < Piece
       #only allowed to move one space if pawn has already moved
     else
       x_difference.zero? && y_difference == 1 || x_difference.zero? && y_difference == 2
-      #allowed to move 1 or 2 spaces if pawn has not moved yet
+
     end
-  end
-
-
-PAWN = 'Pawn'.freeze
