@@ -5,10 +5,6 @@ class Rook < Piece
     return true if new_x.to_i == x_position || new_y.to_i == y_position
     false
   end
-  
-  def obstructed_squares(new_x, new_y)
-    rectilinear_obstruction_array(new_x, new_y)
-  end
 
   def is_obstructed?(new_x, new_y)
     x1 = self.x_position
@@ -20,5 +16,3 @@ class Rook < Piece
     end
   end
 end
-
-

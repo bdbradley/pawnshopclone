@@ -47,26 +47,12 @@ class Game < ApplicationRecord
   # Checkmate Starts
 
   # The player whose turn it is to move is not in check but has no legal move
-  def stalemate?(color)
-    your_pieces = my_pieces(color)
-    available_moves = []
-    your_pieces.each do |piece|
-      1.upto(8) do |x|
-        1.upto(8) do |y|
-          if piece.valid_move?(x, y) && !piece.move_causes_check?(x, y)
-            available_moves << [x, y]
-          end
-        end
-      end
-    end
-    return false if available_moves.any?
-    true
-  end
 
   def checkmate?(color)
     return false unless in_check?(color)
-    return false if capture_opponent_causing_check?(color)
-    return false if i_can_move_out_of_check?(color)
+    # return false if capture_opponent_causing_check?(color)
+    # return false if i_can_move_out_of_check?(color)
+    return false if i_can_avoid_check?(color)
     true
   end
 
@@ -110,6 +96,21 @@ class Game < ApplicationRecord
     state
   end
 
+  def i_can_avoid_check?(color)
+    available_moves = []
+    my_pieces(color).each do |piece|
+      1.upto(8) do |x|
+        1.upto(8) do |y|
+          if piece.valid_move?(x, y) && !piece.move_causes_check?(x, y)
+            available_moves << [x, y]
+          end
+        end
+      end
+    end
+
+    available_moves.any?
+  end
+
   # Checkmate Ends
 
   def render_piece(x_pos, y_pos)
@@ -120,6 +121,7 @@ class Game < ApplicationRecord
   def get_piece_at_coor(x_pos, y_pos)
     pieces.find_by(x_position: x_pos, y_position: y_pos)
   end
+
 
   def forfeit(current_user)
     if current_user.id == white_player_id
