@@ -25,6 +25,7 @@ class Piece < ApplicationRecord
     occupying_piece.present? && occupying_piece.color == color
   end
 
+
   def square_occupied?(new_x, new_y)
     piece = game.pieces.find_by(x_position: new_x, y_position: new_y)
     return false if piece.nil?
@@ -55,6 +56,7 @@ class Piece < ApplicationRecord
   def get_piece_at_coor(x_pos, y_pos)
     game.get_piece_at_coor(x_pos, y_pos)
   end
+
 
   # start stubs to make Rspec work
   def valid_move?(new_x, new_y)
@@ -201,3 +203,5 @@ class Piece < ApplicationRecord
     end
   end
 end
+
+    
