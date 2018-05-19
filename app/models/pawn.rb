@@ -20,16 +20,6 @@ end
     end
 
 
-    #PAWN PROMOTION
-     # checks to see if a pawn is promotable.
-    def promotable?(new_x, new_y)
-      true
-    end
-
-    # performs the pawn promotion by checking to see if the pawn meets the necessary requirements.
-    def promote!(new_x, new_y)
-      true
-    end
 
     private
 
