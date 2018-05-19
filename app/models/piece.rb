@@ -56,6 +56,23 @@ class Piece < ApplicationRecord
     game.get_piece_at_coor(x_pos, y_pos)
   end
 
+  # start stubs to make Rspec work
+  def valid_move?(new_x, new_y)
+    true
+  end
+
+  def horizontal_move?(new_x, new_y)
+    true
+  end
+
+  def vertical_move?(new_x, new_y)
+    true
+  end
+
+  def diagonal_move?(new_x, new_y)
+    true
+  end
+# end stubs to make Rspec work
 
   def is_vertically_obstructed?(_new_x, new_y)
     x1 = x_position
