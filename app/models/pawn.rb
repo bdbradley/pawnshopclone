@@ -13,6 +13,20 @@ class Pawn < Piece
       return true
   end
 
+end
+
+    def can_attack_square?(new_x, new_y)
+      x_difference = (new_x.to_i - x_position.to_i).abs
+      y_difference = (new_y.to_i - y_position.to_i).abs
+      return true if x_difference == 1 && y_difference == 1
+      false
+    end
+
+
+
+    private
+
+
   def can_attack_square?(new_x, new_y)
     x_difference = (new_x.to_i - x_position.to_i).abs
     y_difference = (new_y.to_i - y_position.to_i).abs

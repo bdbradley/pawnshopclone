@@ -32,12 +32,5 @@ RSpec.describe GamesController, type: :controller do
       get :show, params: { id: game.id }
       expect(response).to have_http_status(:redirect)
     end
-
-    it 'should return the number and the correct piece' do
-      get :show, params: { id: game.id }
-      @pieces = game.pieces
-
-      expect(@pieces.count).to eq 32
-    end
   end
 end

@@ -50,8 +50,8 @@ class Game < ApplicationRecord
 
   def checkmate?(color)
     return false unless in_check?(color)
-    # return false if capture_opponent_causing_check?(color)
-    # return false if i_can_move_out_of_check?(color)
+    return false if capture_opponent_causing_check?(color)
+    return false if i_can_move_out_of_check?(color)
     return false if i_can_avoid_check?(color)
     true
   end

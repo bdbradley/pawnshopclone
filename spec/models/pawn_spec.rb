@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Pawn, type: :model do
+
+  let(:game) do
+  Game.create(
+    white_user: FactoryBot.create(:user),
+    black_user: FactoryBot.create(:user))
+  end
+
   describe '#valid_move?' do
     let(:pawn) { FactoryBot.create :pawn, x_position: 2, y_position: 2, is_white: true }
 
@@ -8,7 +15,7 @@ RSpec.describe Pawn, type: :model do
       expect(pawn.valid_move?(2, 3)).to eq true
     end
   end
-    it 'is successful to down/left' do
-      expect(pawn.valid_move?(4, 4)).to eq true
-    end
+  it 'is successful to down/left' do
+    expect(pawn.valid_move?(4, 4)).to eq true
   end
+end
