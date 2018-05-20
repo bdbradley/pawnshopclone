@@ -55,8 +55,7 @@ end
     else
       x_difference.zero? && y_difference == 1 || x_difference.zero? && y_difference == 2
 
-      end
     end
-  end 
-end 
+  end
+end  
    
