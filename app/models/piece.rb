@@ -58,6 +58,11 @@ class Piece < ApplicationRecord
   end
 
 
+  def never_moved?
+     updated_at == created_at
+  end
+
+
   # start stubs to make Rspec work
   def valid_move?(new_x, new_y)
     true

@@ -11,7 +11,7 @@ class Game < ApplicationRecord
 
   def populate_board!
     1.upto(8).each do |i|
-      Pawn.create(game_id: id, is_white: true, x_position: i, y_position: 2)
+    Pawn.create(game_id: id, is_white: true, x_position: i, y_position: 2)
     end
 
     Rook.create(game_id: id, is_white: true, x_position: 1, y_position: 1)
@@ -28,7 +28,7 @@ class Game < ApplicationRecord
 
     # Black Player#
     1.upto(8).each do |i|
-      Pawn.create(game_id: id, is_white: false, x_position: i, y_position: 7)
+    Pawn.create(game_id: id, is_white: false, x_position: i, y_position: 7)
     end
 
     Rook.create(game_id: id, is_white: false, x_position: 1, y_position: 8)
@@ -130,6 +130,7 @@ class Game < ApplicationRecord
       update!(player_win: white_player_id, player_lose: black_player_id)
     end
   end
+
 
   # logic relating to state
   IN_PROGRESS = 0
