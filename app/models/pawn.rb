@@ -12,28 +12,8 @@ class Pawn < Piece
       update(turn_pawn_moved_twice: game.move_number + 1) if moving_two_squares?(new_x.to_i, new_y.to_i)
       return true
   end
-
 end
 
-    def can_attack_square?(new_x, new_y)
-      x_difference = (new_x.to_i - x_position.to_i).abs
-      y_difference = (new_y.to_i - y_position.to_i).abs
-      return true if x_difference == 1 && y_difference == 1
-      false
-
-    end
-  end
-
-  def can_attack_square?(new_x, new_y)
-    x_difference = (new_x.to_i - x_position.to_i).abs
-    y_difference = (new_y.to_i - y_position.to_i).abs
-    return true if x_difference == 1 && y_difference == 1
-    false
-  end
-
-
-
-  private
 
 
   def pawn_capture?(new_x, new_y)
@@ -65,23 +45,10 @@ end
   end
 
 
-
   def can_attack_square?(new_x, new_y)
     x_difference = (new_x.to_i - x_position.to_i).abs
     y_difference = (new_y.to_i - y_position.to_i).abs
     return true if x_difference == 1 && y_difference == 1
-    false
-  end
-
-
-
-  private
-
-  def pawn_capture?(new_x, new_y)
-    x_difference = (new_x.to_i - x_position.to_i).abs
-    y_difference = (new_y.to_i - y_position.to_i).abs
-    piece_to_capture = Piece.exists?(x_position: new_x, y_position: new_y, is_white: !is_white, game: game)
-    return true if piece_to_capture && x_difference == 1 && y_difference == 1
     false
   end
 
