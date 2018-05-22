@@ -11,7 +11,7 @@ class Game < ApplicationRecord
 
   def populate_board!
     1.upto(8).each do |i|
-      Pawn.create(game_id: id, is_white: true, x_position: i, y_position: 2)
+    Pawn.create(game_id: id, is_white: true, x_position: i, y_position: 2)
     end
 
     Rook.create(game_id: id, is_white: true, x_position: 1, y_position: 1)
@@ -23,12 +23,12 @@ class Game < ApplicationRecord
     Bishop.create(game_id: id, is_white: true, x_position: 3, y_position: 1)
     Bishop.create(game_id: id, is_white: true, x_position: 6, y_position: 1)
 
-    King.create(game_id: id, is_white: true, x_position: 4, y_position: 1)
-    Queen.create(game_id: id, is_white: true, x_position: 5, y_position: 1)
+    King.create(game_id: id, is_white: true, x_position: 5, y_position: 1)
+    Queen.create(game_id: id, is_white: true, x_position: 4, y_position: 1)
 
     # Black Player#
     1.upto(8).each do |i|
-      Pawn.create(game_id: id, is_white: false, x_position: i, y_position: 7)
+    Pawn.create(game_id: id, is_white: false, x_position: i, y_position: 7)
     end
 
     Rook.create(game_id: id, is_white: false, x_position: 1, y_position: 8)
@@ -122,26 +122,6 @@ class Game < ApplicationRecord
     pieces.find_by(x_position: x_pos, y_position: y_pos)
   end
 
-  def opponent_king(is_white)
-    pieces.find_by(type: KING, is_white: !is_white)
-  end
-
-  def your_king(is_white)
-    pieces.find_by(type: KING, is_white: is_white)
-  end
-
-  def under_attack?(is_white, x_pos, y_pos)
-    pieces.where.not(is_white: is_white, x_position: nil).find_each do |piece|
-      return true if piece.valid_move?(x_pos, y_pos)
-      return true if piece.type == 'Pawn' && piece.can_attack_square?(x_pos, y_pos)
-    end
-    false
-  end
-
-  def check?(is_white)
-    your_piece = your_king(is_white)
-    under_attack?(is_white, your_piece.x_position, your_piece.y_position)
-  end
 
   def forfeit(current_user)
     if current_user.id == white_player_id
@@ -150,6 +130,7 @@ class Game < ApplicationRecord
       update!(player_win: white_player_id, player_lose: black_player_id)
     end
   end
+
 
   # logic relating to state
   IN_PROGRESS = 0
