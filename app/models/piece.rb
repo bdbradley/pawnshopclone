@@ -56,17 +56,10 @@ class Piece < ApplicationRecord
     game.get_piece_at_coor(x_pos, y_pos)
   end
 
-#Related to castling method king
-
   def never_moved?
      updated_at == created_at
   end
 
-  def path_blocked?(new_x, new_y)
-    true
-  end
-
-#End castling
 
   # start stubs to make Rspec work
   def valid_move?(new_x, new_y)

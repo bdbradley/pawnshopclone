@@ -19,14 +19,14 @@ end
 	def castle_kingside?(new_x, new_y)
 	  x == 6 && y == y_position && castle_rook_kingside && \
 	    castle_rook_kingside.never_moved? && \
-	    castle_rook_kingside.path_blocked?(4, y_position) == false
+	    castle_rook_kingside.is_obstructed?(4, y_position) == false
 	end
 
 	# determines if king is attempting to castle on the queenside
 	def castle_queenside?(new_x, new_y)
 	  x == 2 && y == y_position && castle_rook_queenside && \
 	    castle_rook_queenside.never_moved? && \
-	    castle_rook_queenside.path_blocked?(4, y_position) == false
+	    castle_rook_queenside.is_obstructed?(4, y_position) == false
 	end
 
 	# determines if there is a rook to castle with kingside
