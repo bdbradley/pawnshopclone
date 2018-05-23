@@ -3,20 +3,19 @@
 <head>
   <meta charset="utf-8" />
 
+  
+
+
+
+  
+
       <div class="wrapper">
-        <div class="filter"></div>
-          <div class="page-header">
-            <br>
-            <div class="d-flex justify-content-center">
-              <a class="navbar-brand" href="/">The Pawnshop</a>
-            </div>
-            <h5 class="tag-line">Where the Net comes for Chess</h5>
-            
-            
+        <div class="page-header" style="background-image: url(../assets/images/bruno.jpg");">
+            <div class="filter"></div>
             <div class="container">
-              <div class="row">
-                <div class="col-md-4 col-sm-6 ml-auto mr-auto">
-                  <div class="card card-register">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 ml-auto mr-auto">
+                        <div class="card card-register">
                             <h3 class="card-title">Welcome</h3>
                             <form class="register-form">
                                 <label>Email</label>
@@ -24,17 +23,16 @@
 
                                 <label>Password</label>
                                 <input type="password" class="form-control no-border" placeholder="Password">
-                                <%= link_to 'Sign In', new_user_session_path, :class => "btn btn-danger btn-block btn-round" %>
+                                <button class="btn btn-danger btn-block btn-round">Sign In</button>
                             </form>
                             <div class="forgot">
-                              <%= link_to 'New Here? Sign Up to Play!', new_user_registration_path, :class => "btn btn-link btn-danger"%>
+                                <a href="#paper-kit" class="btn btn-link btn-danger">Forgot password?</a>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
         <div class="demo-footer text-center">
-          <h6>&copy; made with <i class="fa fa-heart heart"></i> by The Rubber Duckies</h6>
+          <h6>&copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by The Rubber Duckies</h6>
         </div>
       </div>
   </div>

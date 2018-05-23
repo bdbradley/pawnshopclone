@@ -4,74 +4,28 @@
 @import url('https://fonts.googleapis.com/css?family=Homemade+Apple');
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script:700');
 
-.hero {
-  background: image_url('ChessHero2.jpeg') no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 700px;
-  box-shadow: 0px 1px 3px #2a2a2a;
-
-}
-
-
-
-
-.nav-link {
-    color: white;
-}
-
-.navbar-toggler {
-    color: white;
-
-}
-
-.navbar-brand, a:hover {
-    color: #b2ae9e;
-}
-
 .navbar-brand {
 
     color: white;
     font-size: 96px;
     text-align: center;
     font-family: 'Dancing Script', cursive;
+    opacity: .7;
 
 }
 
-#trigger {
-    color: white;
-    background-color: red;
-    width: 200px;
-
-
-
-
+.tag-line {
+  color: white;
+  text-align: center;
+  font-weight: 700; 
 }
 
-.login-container {
 
-  max-width: 350px;
-  width: 100% !important;
-  background-color: #F7F7F7;
-
-
+.page-header {
+  background-image: url('ChessHero.jpeg');
 }
 
-.booyah-box {
-  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
-  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
-  box-shadow: 1px 1px 2px 0 #d0d0d0;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
-  padding: 10px;
-}
 
-.booyah-box h2, .booyah-box h1 {
-  margin: 10px;
-}
 
 #team {
     background: #DE6262;
