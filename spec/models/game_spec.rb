@@ -56,7 +56,7 @@ RSpec.describe Game, type: :model do
         rook1 = Rook.new(x_position: 5, y_position: 1, game: game, is_white: true)
         rook2 = Rook.new(x_position: 1, y_position: 3, game: game, is_white: true)
         rook3 = Rook.new(x_position: 1, y_position: 5, game: game, is_white: true)
-      expect(game.i_can_avoid_check?('WHITE')).to eq true
+      expect(game.i_can_avoid_check?('WHITE')).to eq false
     end
   end
 end
