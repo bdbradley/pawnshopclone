@@ -97,8 +97,7 @@ class Game < ApplicationRecord
     pieces.where(color: color, type: 'King')
   end
 
-  def x_position
-  end
+
 
   def i_can_move_out_of_check?(color)
     king = find_king(color)
