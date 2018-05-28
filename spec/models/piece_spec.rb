@@ -7,6 +7,8 @@ describe '#off_board?' do
       
     it 'returns true if piece off_board' do
       expect(piece.off_board?(1, 9)).to eq true
+
+      expect(piece.off_board?(2, 3)).to eq false
     end
   end
 end
