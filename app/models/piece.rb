@@ -81,7 +81,8 @@ class Piece < ApplicationRecord
   end
 # end stubs to make Rspec work
 
-  def is_vertically_obstructed?(_new_x, new_y)
+  def is_vertically_obstructed?(new_x, new_y)
+
     x1 = x_position
     y1 = y_position
     if y1 < new_y
@@ -97,13 +98,13 @@ class Piece < ApplicationRecord
       if get_piece_at_coor(x1, i).nil?
         i += 1
       else
-        return false
+        return true
       end
     end
-    true
+    false
   end
 
-  def is_horizontally_obstructed?(new_x, _new_y)
+  def is_horizontally_obstructed?(new_x, new_y)
     x1 = x_position
     y1 = y_position
     if x1 < new_x
@@ -120,10 +121,10 @@ class Piece < ApplicationRecord
       if get_piece_at_coor(i, y1).nil?
         i += 1
       else
-        return false
+        return true
       end
     end
-    true
+    false
   end
 
 
@@ -141,10 +142,10 @@ class Piece < ApplicationRecord
           x += 1
           y += 1
         else
-          return false
+          return true
         end
       end
-      return true
+      return false
     end
 
 
@@ -157,10 +158,10 @@ class Piece < ApplicationRecord
           x += 1
           y -= 1
         else
-          return false
+          return true
         end
       end
-      return true
+      return false
     end
 
 
@@ -173,10 +174,10 @@ class Piece < ApplicationRecord
           x -= 1
           y += 1
         else
-          return false
+          return true
         end
       end
-      return true
+      return false
     end
 
 
@@ -189,10 +190,10 @@ class Piece < ApplicationRecord
           x -= 1
           y -= 1
         else
-          return false
+          return true
         end
       end
-      return true
+      return false
     end
   end
 
@@ -208,5 +209,3 @@ class Piece < ApplicationRecord
     end
   end
 end
-
-    

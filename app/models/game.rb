@@ -11,37 +11,37 @@ class Game < ApplicationRecord
 
   def populate_board!
     1.upto(8).each do |i|
-    Pawn.create(game_id: id, is_white: true, x_position: i, y_position: 2)
+    Pawn.create(game_id: id, is_white: true, x_position: i, y_position: 2, color: 'WHITE')
     end
 
-    Rook.create(game_id: id, is_white: true, x_position: 1, y_position: 1)
-    Rook.create(game_id: id, is_white: true, x_position: 8, y_position: 1)
+    Rook.create(game_id: id, is_white: true, x_position: 1, y_position: 1, color: 'WHITE')
+    Rook.create(game_id: id, is_white: true, x_position: 8, y_position: 1, color: 'WHITE')
 
-    Knight.create(game_id: id, is_white: true,  x_position: 2, y_position: 1)
-    Knight.create(game_id: id, is_white: true,  x_position: 7, y_position: 1)
+    Knight.create(game_id: id, is_white: true,  x_position: 2, y_position: 1, color: 'WHITE')
+    Knight.create(game_id: id, is_white: true,  x_position: 7, y_position: 1, color: 'WHITE')
 
-    Bishop.create(game_id: id, is_white: true, x_position: 3, y_position: 1)
-    Bishop.create(game_id: id, is_white: true, x_position: 6, y_position: 1)
+    Bishop.create(game_id: id, is_white: true, x_position: 3, y_position: 1, color: 'WHITE')
+    Bishop.create(game_id: id, is_white: true, x_position: 6, y_position: 1, color: 'WHITE')
 
-    King.create(game_id: id, is_white: true, x_position: 5, y_position: 1)
-    Queen.create(game_id: id, is_white: true, x_position: 4, y_position: 1)
+    King.create(game_id: id, is_white: true, x_position: 5, y_position: 1, color: 'WHITE')
+    Queen.create(game_id: id, is_white: true, x_position: 4, y_position: 1, color: 'WHITE')
 
     # Black Player#
     1.upto(8).each do |i|
-    Pawn.create(game_id: id, is_white: false, x_position: i, y_position: 7)
+    Pawn.create(game_id: id, is_white: false, x_position: i, y_position: 7, color: 'BLACK')
     end
 
-    Rook.create(game_id: id, is_white: false, x_position: 1, y_position: 8)
-    Rook.create(game_id: id, is_white: false, x_position: 8, y_position: 8)
+    Rook.create(game_id: id, is_white: false, x_position: 1, y_position: 8, color: 'BLACK')
+    Rook.create(game_id: id, is_white: false, x_position: 8, y_position: 8, color: 'BLACK')
 
-    Knight.create(game_id: id, is_white: false, x_position: 2, y_position: 8)
-    Knight.create(game_id: id, is_white: false, x_position: 7, y_position: 8)
+    Knight.create(game_id: id, is_white: false, x_position: 2, y_position: 8, color: 'BLACK')
+    Knight.create(game_id: id, is_white: false, x_position: 7, y_position: 8, color: 'BLACK')
 
-    Bishop.create(game_id: id, is_white: false, x_position: 3, y_position: 8)
-    Bishop.create(game_id: id, is_white: false, x_position: 6, y_position: 8)
+    Bishop.create(game_id: id, is_white: false, x_position: 3, y_position: 8, color: 'BLACK')
+    Bishop.create(game_id: id, is_white: false, x_position: 6, y_position: 8, color: 'BLACK')
 
-    King.create(game_id: id, is_white: false, x_position: 5, y_position: 8)
-    Queen.create(game_id: id, is_white: false, x_position: 4, y_position: 8)
+    King.create(game_id: id, is_white: false, x_position: 5, y_position: 8, color: 'BLACK')
+    Queen.create(game_id: id, is_white: false, x_position: 4, y_position: 8, color: 'BLACK')
   end
 
   # Checkmate Starts
@@ -61,25 +61,49 @@ class Game < ApplicationRecord
     @enemies_in_check = []
     king = find_king(color)
     if king
-      opponents = opponents_pieces(color)
-      opponents.each do |piece|
-        @enemies_in_check << piece if piece.valid_move?(king.x_position, king.y_position) == true
-      end
+    @enemies_in_check = enemies_in_check(color)
     end
     @enemies_in_check.any?
   end
 
+  def enemies_in_check(color)
+    @enemies_in_check = []
+    opponents = opponents_pieces(color)
+    opponents.each do |piece|
+      @enemies_in_check << piece if piece.valid_move?(king.x_position, king.y_position) == true
+    end
+  end
+
   def capture_opponent_causing_check?(color)
+
     friendlies = my_pieces(color)
     not_capture = []
     friendlies.each do |friend|
-      @enemies_in_check.each do |enemy|
+      enemies_in_check(color).each do |enemy|
         not_capture << friend if friend.valid_move?(enemy.x_position, enemy.y_position) == true
       end
     end
-    return true if not_capture.any?
-    false
+    return false if not_capture.any?
+    true
   end
+
+
+  def opponents_pieces(color)
+    opponents_color = if color == 'WHITE' then 'BLACK' else 'WHITE' end
+    pieces.where(color: opponents_color)
+  end
+
+  def find_king(color)
+    pieces.where(color: color, type: 'King').first
+
+  end
+
+
+  def my_pieces(color)
+    pieces.where(color: color, type: 'King')
+  end
+
+
 
   def i_can_move_out_of_check?(color)
     king = find_king(color)
@@ -107,7 +131,6 @@ class Game < ApplicationRecord
         end
       end
     end
-
     available_moves.any?
   end
 
@@ -122,7 +145,6 @@ class Game < ApplicationRecord
     pieces.find_by(x_position: x_pos, y_position: y_pos)
   end
 
-
   def forfeit(current_user)
     if current_user.id == white_player_id
       update!(player_win: black_player_id, player_lose: white_player_id)
@@ -130,7 +152,6 @@ class Game < ApplicationRecord
       update!(player_win: white_player_id, player_lose: black_player_id)
     end
   end
-
 
   # logic relating to state
   IN_PROGRESS = 0
