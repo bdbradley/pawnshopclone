@@ -326,7 +326,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   line-height: 1.75;
   cursor: pointer;
   text-transform: uppercase;
-  background-color: #66615B;
+  background-color: #000000;
   border-color: #66615B;
   color: #FFFFFF;
   opacity: 1;
@@ -349,7 +349,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   border-top-color: #FFFFFF;
 }
 .btn.btn-link {
-  color: #66615B;
+  color: #000000;
 }
 .btn.btn-link:hover, .btn.btn-link:focus, .btn.btn-link:active, .btn.btn-link.active, .open > .btn.btn-link.dropdown-toggle {
   background-color: transparent;
@@ -519,7 +519,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 }
 
 .btn-danger {
-  background-color: #f5593d;
+  background-color: #004225;
   border-color: #f5593d;
   color: #FFFFFF;
   opacity: 1;
@@ -534,7 +534,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   border-top-color: #FFFFFF;
 }
 .btn-danger.btn-link {
-  color: #f5593d;
+  color: #00000;
 }
 .btn-danger.btn-link:hover, .btn-danger.btn-link:focus, .btn-danger.btn-link:active, .btn-danger.btn-link.active, .open > .btn-danger.btn-link.dropdown-toggle {
   background-color: transparent;
@@ -8684,7 +8684,7 @@ a.pswp__share--download:hover {
   margin-top: 15px;
 }
 .card.card-register .card-title {
-  color: #B33C12;
+  color: #000000;
   text-align: center;
   font-weight: 900; 
 }
@@ -10276,7 +10276,7 @@ body {
 }
 
 .register-card .title {
-  color: #B33C12;
+  color: #004225;
   text-align: center;
 }
 
@@ -10328,7 +10328,7 @@ body {
   margin-top: 15px;
 }
 .full-screen.login .demo-card .title {
-  color: #B33C12;
+  color: #004225;
   text-align: center;
 }
 .full-screen.login .demo-card .btn {
